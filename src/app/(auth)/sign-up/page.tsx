@@ -1,7 +1,11 @@
-import React from "react";
+"use client";
 
-const Page = () => {
-  return <div>yanzlagdsan</div>;
-};
+import SignupForm from "./components/SignupForm";
 
-export default Page;
+export default function SignupPage() {
+  return (
+    <div className="flex items-center justify-center min-h-screen p-4">
+      <SignupForm />
+    </div>
+  );
+}
