@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-
 export default function NavBar() {
   return (
     <div className="w-full">
@@ -25,25 +24,20 @@ export default function NavBar() {
           </Link>
           {/* Navigation Links */}
           {/* Action Buttons */}
-          <div className="flex items-center    gap-2.5">
+          <div className="flex items-center gap-2.5">
             <Link
-              href="/yardim"
+              href=""
               className="hidden md:inline-flex px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
             >
               Хэрэглэгчээр Нэвтрэх
             </Link>
             <Link
-              href="/giris"
+              href=""
               className="hidden md:inline-flex px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
             >
               Ажилчинаар Нэвтрэх
             </Link>
-            <Link
-              href="/hizmet"
-              className="inline-flex px-4 py-2 text-sm bg-green-500 text-white rounded-md hover:bg-green-600"
-            >
-              SigIn
-            </Link>
+
           </div>
         </div>
       </div>
