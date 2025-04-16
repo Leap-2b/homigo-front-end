@@ -1,23 +1,27 @@
 import axios from "axios";
 import { toast } from "sonner";
 
-export const signIn = async (phone: string, password: string) => {
+export const signIn = async (phone: number, password: string) => {
   try {
-    const response = await axios.post(`http://localhost:3000/signup`, {
-      phone,
-      password,
-    });
+    const response = await axios.post(
+      `http://localhost:8080/auth/employe/sign-in`,
+      { phone, password }
+    );
 
     const data = response.data;
-    console.log(data);
-    if (data.error) {
-      toast.error(data.message || "Алдаа гарлаа.");
+    toast.success("Амжилттай нэвтэрлээ!");
+
+    return data;
+  } catch (error: any) {
+    if (error.response) {
+      const data = error.response.data;
+      toast.error(data.message || "Нууц үг эсвэл утасны дугаар буруу.");
     } else {
-      toast.success("Бүртгэл амжилттай!");
-      return data;
+      // 🔥 Сүлжээний алдаа
+      toast.error("Сервертэй холбогдож чадсангүй.");
     }
-  } catch (error) {
-    console.error("Бүртгүүлэх үед алдаа гарлаа:", error);
-    toast.error("Сервертэй холбогдох үед алдаа гарлаа.");
+
+    console.error("Axios error:", error);
+    return null;
   }
 };
