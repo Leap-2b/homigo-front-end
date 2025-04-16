@@ -1,64 +1,66 @@
 import Link from "next/link"
-import { Facebook, Instagram } from "lucide-react"
+import { Facebook, Instagram, Mail, Phone, MapPin } from "lucide-react"
+
 export default function Footer() {
     return (
-        <footer className="w-full bg-white border-t border-gray-200 pt-12 pb-6">
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-                    {/* Categories Column */}
-                    <div>
-                        <h3 className="text-gray-700 font-medium mb-4">Categories</h3>
-                        <ul className="space-y-3">
-                            <li>
-                                <Link href="#" className="text-gray-500 hover:text-gray-700 text-sm">
-                                    Cliener
-                                </Link>
+        <footer className="w-full  text-black py-12 border mt-7">
+            <div className="w-[90%] container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* About Us Section */}
+                    <div className="flex flex-col gap-4">
+                        <h3 className="text-black text-lg font-semibold border-b border-gray-700 pb-2">Бидний тухай</h3>
+                        <p className="text-sm leading-relaxed">
+                            Манай компани нь IT болон цэвэрлэгээний чиглэлээр мэргэшсэн ажилчдыг хувь хүн, байгууллагад найдвартай,
+                            шуурхай зуучлах үйлчилгээ үзүүлдэг. Бид ажил хайгч ба ажил олгогчийн хэрэгцээг холбосон гүүр нь болж
+                            ажилладаг.
+                        </p>
+                    </div>
+
+                    {/* Services Section */}
+                    <div className="flex flex-col gap-4">
+                        <h3 className="text-black text-lg font-semibold border-b border-gray-700 pb-2">Үйлчилгээний чиглэлүүд:</h3>
+                        <ul className="space-y-3 text-sm">
+                            <li className=" transition-colors">
+                                IT мэргэжилтний зуучлал (Компьютер формат засвар г.м.)
                             </li>
-                            <li>
-                                <Link href="#" className="text-gray-500 hover:text-gray-700 text-sm">
-                                    IT
-                                </Link>
+                            <li className="transition-colors">
+                                Цэвэрлэгээний ажилтны зуучлал (Оффис, гэрийн болон байгууллагын цэвэрлэгээ г.м.)
                             </li>
                         </ul>
                     </div>
 
-                    {/* For Clients Column */}
-                    <div>
-                        <h3 className="text-gray-700 font-medium mb-4">For Clients</h3>
-                        <ul className="space-y-3">
-
-                            <li>
-                                <Link href="#" className="text-gray-500 hover:text-gray-700 text-sm">
-                                    Cleaner
-                                </Link>
+                    {/* Contact Section */}
+                    <div className="flex flex-col gap-4">
+                        <h3 className="text-black text-lg font-semibold border-b border-gray-700 pb-2">CONTACT US</h3>
+                        <ul className="space-y-3 text-sm">
+                            <li className="flex items-start gap-3">
+                                <MapPin size={18} className="text-gray-400 mt-0.5 flex-shrink-0" />
+                                <span> Ulaanbaatar, Mongolia</span>
                             </li>
-                            <li>
-                                <Link href="#" className="text-gray-500 hover:text-gray-700 text-sm">
-                                    IT
-                                </Link>
+                            <li className="flex items-center gap-3">
+                                <Phone size={18} className="text-gray-400 flex-shrink-0" />
+                                <span>+89796769</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Mail size={18} className="text-gray-400 flex-shrink-0" />
+                                <span>Pinecone@gmail.com</span>
                             </li>
                         </ul>
+
+                        <div className="flex gap-3 mt-4">
+                            <Link href="#" className=" p-2 rounded-full hover:bg-gray-200 transition-colors">
+                                <Facebook size={18} />
+                            </Link>
+                            <Link href="#" className=" p-2 rounded-full hover:bg-gray-200 transition-colors">
+                                <Instagram size={18} />
+                            </Link>
+
+                        </div>
                     </div>
                 </div>
-                <div className="border-t border-gray-200 pt-6">
-                    <div className="flex flex-col md:flex-row gap-6 items-center">
-                        <div className="flex items-center mb-4 md:mb-0">
-                            <Link href="/" >
-                            </Link>
-                            <span className="text-gray-400 text-sm">©Homi-Go. 2025</span>
-                        </div>
-                        <div className="flex items-center space-x-6">
-                            <Link href="#" className="text-gray-500 hover:text-gray-700">
-                                <Instagram className="h-5 w-5" />
-                                <span className="sr-only">Instagram</span>
-                            </Link>
 
-                            <Link href="#" className="text-gray-500 hover:text-gray-700">
-                                <Facebook className="h-5 w-5" />
-                                <span className="sr-only">Facebook</span>
-                            </Link>
-                        </div>
-                    </div>
+                <div className="border-t border-gray-800 mt-12 pt-6 text-sm text-center">
+                    <p>© {new Date().getFullYear()}Homi-Go All rights reserved.</p>
                 </div>
             </div>
         </footer>
