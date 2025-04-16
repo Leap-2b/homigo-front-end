@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
 
 type UserContextType = {
-  signUp: (
+  signIn: (
     userName: string,
     phone: string,
     email: string,
@@ -17,14 +17,15 @@ const UserContext = createContext<UserContextType>({} as UserContextType);
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
-  const signUp = async (
+  const signIn = async (
     userName: string,
     phone: string,
     email: string,
     password: string
   ) => {
     try {
-      const response = await axios.post("http://localhost:7000/auth/sign-up", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      const response = await axios.post(apiUrl, {
         userName,
         phone,
         email,
@@ -39,14 +40,14 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
         toast.success("Амжилттай бүртгэгдлээ!");
         router.push("/login");
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Бүртгүүлэх үед алдаа гарлаа:", error);
       toast.error("Сервертэй холбогдох үед алдаа гарлаа.");
     }
   };
 
   return (
-    <UserContext.Provider value={{ signUp }}>
+    <UserContext.Provider value={{ signIn }}>
       <Toaster position="top-center" richColors />
       {children}
     </UserContext.Provider>
