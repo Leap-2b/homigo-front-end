@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { DropdownSignin, DropdownSignup } from "./Dropdown";
 export default function NavBar() {
   return (
     <div className="w-full">
@@ -25,19 +26,9 @@ export default function NavBar() {
           {/* Navigation Links */}
           {/* Action Buttons */}
           <div className="flex items-center gap-2.5">
-            <Link
-              href=""
-              className="hidden md:inline-flex px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-            >
-              Хэрэглэгчээр Нэвтрэх
-            </Link>
-            <Link
-              href=""
-              className="hidden md:inline-flex px-4 py-2 text-sm border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-            >
-              Ажилчинаар Нэвтрэх
-            </Link>
+            <DropdownSignin />
 
+            <DropdownSignup />
           </div>
         </div>
       </div>
