@@ -32,9 +32,8 @@ const Page = () => {
     },
   });
 
-
   function onSubmit(values: z.infer<typeof formSchema>) {
-    signIn(Number(values.phone), values.password)
+    signIn(Number(values.phone), values.password);
   }
   return (
     <div className="w-screen h-[85vh] flex flex-col justify-center items-center">
