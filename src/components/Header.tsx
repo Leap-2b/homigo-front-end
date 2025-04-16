@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DropdownSignin, DropdownSignup } from "./Dropdown";
+import { useUser } from "@/app/_context/UserContext";
 export default function NavBar() {
+  const { currentUser } = useUser();
   return (
     <div className="w-full">
       {/* Navigation Bar */}
+      {/* currentUser? Avatar : LoginButton */}
       <div className="w-full bg-white border-b sticky top-0 z-50">
         <div className="w-[90%] m-auto justify-between items-center px-4 py-3 flex ">
           {/* Logo */}
