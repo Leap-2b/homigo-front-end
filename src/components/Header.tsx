@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DropdownSignin, DropdownSignup } from "./Dropdown";
 import { useUser } from "@/app/_context/UserContext";
-export default function NavBar() {
+export default function Header() {
   // const { currentUser } = useUser();
   return (
     <div className="w-full">
