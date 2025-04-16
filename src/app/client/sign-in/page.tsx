@@ -1,49 +1,57 @@
+"use client";
+import { useUser } from "@/app/_context/UserContext";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
-import { Toaster } from "@/components/ui/sonner";
+import { Label } from "@/components/ui/label";
+import { signIn } from "@/lib/login-utils";
+import { useState } from "react";
 
 const LoginPage = () => {
+  const [userName, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const onLogin = async () => {
+    const user = await signIn(userName, password);
+    localStorage.setItem("user", JSON.stringify(user));
+  };
   return (
-    <div className="flex items-center justify-center h-screen p-5">
-      <div className="rounded-sm border p-6">
-        <div className="w-full flex flex-col gap-40">
-          <div className="w-full">
-            <div className="flex flex-col items-start p-6  ">
-              <h3 className="text-[24px] font-[600] leading-[32px] w-full ">
-                Log in to access your account
-              </h3>
+    <div className="h-screen w-screen flex items-center justify-center">
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle>Нэвтрэх</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="name">Хэргэлэгч</Label>
+              <Input
+                id="name"
+                onChange={(e) => setUserName(e.target.value)}
+                placeholder="Хэргэлэгч"
+              />
             </div>
-            <div className="w-full flex flex-col gap-4">
-              <div className="flex flex-col items-start gap-2 w-full">
-                <p className="text-[16px] font-bold">Email</p>
-                <Input type="email" placeholder="Имэйл хаягаа оруулна уу" />
-              </div>
-
-              <div className="flex flex-col gap-[10px] items-start  w-full">
-                <p className="text-[16px] font-bold">Password</p>
-                <Input type="password" placeholder="Паспортоо оруулна уу" />
-              </div>
-
-              <Link href={"/reset-password"}>
-                <button className="underline text-[14px] cursor-pointer">
-                  Reset password
-                </button>
-              </Link>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="name">Нууц үг</Label>
+              <Input
+                id="name"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="****"
+              />
             </div>
           </div>
-          <div className="flex items-start gap-[10px] px-[24px] pb-[24px] w-full ">
-            <Button
-              type="submit"
-              variant="default"
-              className="w-full cursor-pointer h-10 bg-green-500 hover:bg-green-700"
-            >
-              Continue
-            </Button>
-            <Toaster richColors />
-          </div>
-        </div>
-      </div>
+        </CardContent>
+        <CardFooter className="flex ml-auto">
+          <Button onClick={onLogin}>Нэвтрэх</Button>
+        </CardFooter>
+      </Card>
     </div>
   );
 };
