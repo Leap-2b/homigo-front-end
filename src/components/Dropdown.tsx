@@ -5,23 +5,28 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ChevronDown, User, User2, UserCircle } from "lucide-react";
 import Link from "next/link";
 
 export function DropdownSignin() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">signin</Button>
+        <Button variant="outline" className=" w-[200px] border-0 shadow-none ">
+          <ChevronDown /> Нэвтрэх
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-60  ">
         <Link href={"/client/sign-in"}>
           <DropdownMenuItem>
-            <span>User</span>
+            <User />
+            <span className="">Хэрэглэгчээр нэвтрэх</span>
           </DropdownMenuItem>
         </Link>
         <Link href={"/employee/sign-in"}>
           <DropdownMenuItem>
-            <span>Employee</span>
+            <UserCircle />
+            <span className="">Ажилтнаар нэвтрэх</span>
           </DropdownMenuItem>
         </Link>
       </DropdownMenuContent>
@@ -32,17 +37,21 @@ export function DropdownSignup() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">signup</Button>
+        <Button className="w-[200px] border-0 shadow-none " variant="outline">
+          <ChevronDown /> Бүртгүүлэх
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-60">
         <Link href={"/client/sign-up"}>
           <DropdownMenuItem>
-            <span>User</span>
+            <User />
+            <span className="">Хэрэглэгчээр бүртгүүлэх</span>
           </DropdownMenuItem>
         </Link>
         <Link href={"/employee/sign-up"}>
           <DropdownMenuItem>
-            <span>Employee</span>
+            <UserCircle />
+            <span className="">Ажилтнаар бүртгүүлэх</span>
           </DropdownMenuItem>
         </Link>
       </DropdownMenuContent>

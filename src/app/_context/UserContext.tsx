@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { createContext, ReactNode } from "react";
 import axios from "axios";
 import { toast } from "sonner";

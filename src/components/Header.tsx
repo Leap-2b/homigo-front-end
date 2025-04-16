@@ -10,16 +10,9 @@ export default function NavBar() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <div className="relative flex items-center">
-              <Image
-                src="/avatar.svg"
-                alt=""
-                width={50}
-                height={50}
-                className="w-2 h-2 bg-green-500 rounded-full absolute left-0"
-              />
-
+              <img src="/Homigo.png" alt="" className="w-15 h-15 " />
               <span className="text-gray-800 font-medium text-xl ml-3">
-                Homi-go
+                HomiGo
               </span>
             </div>
           </Link>
