@@ -3,7 +3,7 @@ import Link from "next/link";
 import { DropdownSignin, DropdownSignup } from "./Dropdown";
 import { useUser } from "@/app/_context/UserContext";
 export default function NavBar() {
-  const { currentUser } = useUser();
+  // const { currentUser } = useUser();
   return (
     <div className="w-full">
       {/* Navigation Bar */}
