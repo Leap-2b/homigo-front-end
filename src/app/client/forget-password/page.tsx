@@ -1,6 +1,3 @@
-import { ChevronDown } from "lucide-react";
-import Image from "next/image";
-
 export default function PasswordResetForm() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
@@ -44,10 +41,10 @@ export default function PasswordResetForm() {
           </label>
           <div className="flex gap-2">
             <input
-              type="tel"
+              type="password"
               id="phone"
               className="w-full h-[52px] rounded-lg border border-gray-300 p-4 text-gray-500 focus:border-green-500 focus:outline-none"
-              placeholder="phoneNumber"
+              placeholder="утасны дугаараа оруулна уу"
             />
           </div>
         </div>
@@ -58,7 +55,7 @@ export default function PasswordResetForm() {
             href="mailto:support@armut.com"
             className="text-green-600 hover:underline"
           >
-            support@armut.com
+            lhaireedui@gmail.com
           </a>
           -та манай багтай утсаар холбогдож болно.
         </p>
