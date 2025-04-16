@@ -34,11 +34,11 @@ const Page = () => {
 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    signIn(values.phone, values.password)
+    signIn(Number(values.phone), values.password)
   }
   return (
     <div className="w-screen h-[85vh] flex flex-col justify-center items-center">
-      <div className="w-[450px] border border-solid border-gray-300 rounded-lg p-6 flex flex-col gap-10  rounded-xl shadow-lg">
+      <div className="w-[450px] border border-solid border-gray-300 p-6 flex flex-col gap-10  rounded-xl shadow-lg">
         <div className="text-center flex flex-col gap-3">
           <p className="font-bold text-[25px]">Нэвтрэх</p>
           <p className="text-gray-500">Мэдээллээ бөглөн үргэлжлүүлнэ үү</p>
