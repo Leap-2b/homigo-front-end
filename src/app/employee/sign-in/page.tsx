@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { signIn } from "@/lib/Employee-login-utils";
 
 const Page = () => {
   const formSchema = z.object({
@@ -30,7 +31,11 @@ const Page = () => {
       password: "",
     },
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {}
+
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    signIn(values.phone, values.password)
+  }
   return (
     <div className="w-screen h-[85vh] flex flex-col justify-center items-center">
       <div className="w-[450px] border border-solid border-gray-300 rounded-lg p-6 flex flex-col gap-10  rounded-xl shadow-lg">
@@ -63,7 +68,7 @@ const Page = () => {
                 <FormItem>
                   <FormLabel className="font-bold">Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your email" {...field} />
+                    <Input placeholder="********" {...field} type="password" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
