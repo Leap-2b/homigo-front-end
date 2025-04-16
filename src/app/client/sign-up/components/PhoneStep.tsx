@@ -13,31 +13,35 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+
 import Link from "next/link";
 
 const phoneSchema = z.object({
     phone: z.string()
         .min(8, { message: "Phone number must be at least 8 digits" })
         .regex(/^\d+$/, { message: "Phone number must contain only digits" }),
+        userName: z.string()
+        .min(2, { message: "Phone number must be at least 8 digits" })
+    
 });
 
 type PhoneFormValues = z.infer<typeof phoneSchema>;
 
 interface PhoneStepProps {
-    onSubmit: (phone: string) => void;
+    onSubmit: (phone: string , userName:string) => void;
 }
 export default function PhoneStep({ onSubmit }: PhoneStepProps) {
     const form = useForm<PhoneFormValues>({
         resolver: zodResolver(phoneSchema),
         defaultValues: {
             phone: "",
+            userName: ""
         },
         mode: "onChange",
     });
 
     const handleSubmit = (data: PhoneFormValues) => {
-        onSubmit(data.phone);
+        onSubmit(data.phone , data.userName);
     };
 
     return (
@@ -70,6 +74,23 @@ export default function PhoneStep({ onSubmit }: PhoneStepProps) {
                                     <FormControl>
                                         <Input
                                             placeholder="Enter your phone number"
+                                            {...field}
+                                            className="h-12"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                            <FormField
+                            control={form.control}
+                            name="userName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>User Name</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Enter your User Name"
                                             {...field}
                                             className="h-12"
                                         />

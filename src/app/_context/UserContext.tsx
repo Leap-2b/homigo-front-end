@@ -1,26 +1,30 @@
 "use client";
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
 
 type UserContextType = {
-  signIn: (
+  signUp:  (
     userName: string,
     phone: string,
     email: string,
     password: string
   ) => void;
-  signUp: (phone: string, email: string, password: string) => void;
+  signIn:(phone: string,  password: string) => void;
 };
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
 
+export const useUser = ()=>{
+  return useContext(UserContext)
+}
+
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
-  const signIn = async (
+  const signUp = async (
     userName: string,
     phone: string,
     email: string,
@@ -49,12 +53,11 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const signUp = async (phone: string, email: string, password: string) => {
+  const signIn = async (phone: string,  password: string) => {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
       const response = await axios.post(`${apiUrl}/signup`, {
         phone,
-        email,
         password,
       });
 
@@ -73,7 +76,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <UserContext.Provider value={{ signIn, signUp }}>
+    <UserContext.Provider value={{signUp , signIn}}>
       <Toaster position="top-center" richColors />
       {children}
     </UserContext.Provider>
