@@ -22,7 +22,7 @@ const LoginPage = () => {
     localStorage.setItem("user", JSON.stringify(user));
   };
   return (
-    <div className="h-screen w-screen flex items-center justify-center">
+    <div className="h-[85vh] w-screen flex items-center justify-center">
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Нэвтрэх</CardTitle>

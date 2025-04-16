@@ -9,7 +9,7 @@ const Page = () => {
   const [email, setEmail] = useState<string>("");
   const Allsteps = [FirstStep, SecondStep][currentStep];
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
+    <div className="w-screen h-[85vh] flex flex-col justify-center items-center">
       <Allsteps
         setCurrentStep={setCurrentStep}
         currentStep={currentStep}

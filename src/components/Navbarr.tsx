@@ -2,7 +2,7 @@
 import React from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-const Header = () => {
+const NavBar = () => {
   return (
     <div className="relative bg-blue-200  w-full h-[400px] md:h-[500px]">
       <div className="relative  z-20 container mx-auto px-4 h-full flex flex-col items-center justify-center text-center">
@@ -29,4 +29,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default NavBar;
