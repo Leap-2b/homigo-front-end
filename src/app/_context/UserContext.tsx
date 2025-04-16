@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { createContext, ReactNode } from "react";
 import axios from "axios";
 import { toast } from "sonner";
@@ -12,7 +12,9 @@ type UserContextType = {
     email: string,
     password: string
   ) => void;
+  signUp: (phone: string, email: string, password: string) => void;
 };
+
 const UserContext = createContext<UserContextType>({} as UserContextType);
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
@@ -26,7 +28,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   ) => {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
-      const response = await axios.post(apiUrl, {
+      const response = await axios.post(`${apiUrl}/signin`, {
         userName,
         phone,
         email,
@@ -38,8 +40,31 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
       if (data.error) {
         toast.error(data.message || "Алдаа гарлаа.");
       } else {
-        toast.success("Амжилттай бүртгэгдлээ!");
+        toast.success("Амжилттай нэвтэрлээ!");
         router.push("/login");
+      }
+    } catch (error) {
+      console.error("Нэвтрэх үед алдаа гарлаа:", error);
+      toast.error("Сервертэй холбогдох үед алдаа гарлаа.");
+    }
+  };
+
+  const signUp = async (phone: string, email: string, password: string) => {
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      const response = await axios.post(`${apiUrl}/signup`, {
+        phone,
+        email,
+        password,
+      });
+
+      const data = response.data;
+
+      if (data.error) {
+        toast.error(data.message || "Алдаа гарлаа.");
+      } else {
+        toast.success("Бүртгэл амжилттай!");
+        router.push("/");
       }
     } catch (error) {
       console.error("Бүртгүүлэх үед алдаа гарлаа:", error);
@@ -48,7 +73,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <UserContext.Provider value={{ signIn }}>
+    <UserContext.Provider value={{ signIn, signUp }}>
       <Toaster position="top-center" richColors />
       {children}
     </UserContext.Provider>
