@@ -1,4 +1,5 @@
 import Category from "@/components/Category";
+import Footer from "@/components/Footer";
 import NavBar from "@/components/Header";
 import Header from "@/components/Navbarr";
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
       <NavBar />
       <Header />
       <Category />
+      <Footer />
     </div>
   );
 }
