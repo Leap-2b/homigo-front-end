@@ -44,7 +44,7 @@ const FirstStep = ({
     setCurrentStep(currentStep + 1);
   }
   return (
-    <div className="w-[450px] border border-solid border-gray-300 rounded-lg p-6 flex flex-col gap-10  rounded-xl shadow-lg">
+    <div className="w-[450px] border border-solid border-gray-300  p-6 flex flex-col gap-10  rounded-xl shadow-lg">
       <div className="text-center flex flex-col gap-3">
         <p className="font-bold text-[25px]">Бүртгүүлэх</p>
         <p className="text-gray-500">Мэдээллээ бөглөн үргэлжлүүлнэ үү</p>

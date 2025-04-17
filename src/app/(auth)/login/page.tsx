@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { signIn } from "@/lib/Employee-login-utils";
 
 const Page = () => {
+  const [employe, setEmploye] = useState(false);
   const formSchema = z.object({
     phone: z.string().min(8, {
       message: "Утасны дугаар 8 тоотэй байна",
@@ -33,13 +34,35 @@ const Page = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    signIn(Number(values.phone), values.password);
+    if (employe) {
+      signIn(Number(values.phone), values.password);
+    }
   }
+  const employHandler = () => {
+    setEmploye(true);
+  };
+  const clientHandler = () => {
+    setEmploye(false);
+  };
   return (
-    <div className="w-screen h-[85vh] flex flex-col justify-center items-center">
-      <div className="flex justify-around w-[450px] p-6 border border-solid border-gray-300 rounded-t-lg border-b-transparent shadow-sm">
-        <p>Ажилтан</p>
-        <p>Хэрэглэгч</p>
+    <div className="w-screen h-[85vh] flex flex-col justify-center items-center p">
+      <div className="flex justify-around w-[450px]  border border-solid border-gray-300 rounded-t-lg border-b-transparent ">
+        <Button
+          className={`text-black ${
+            employe ? "bg-green-600" : "bg-transparent"
+          } w-[50%] rounded-b-none hover:bg-green-600 rounded-r-none p-5 hover:bg-accent-none`}
+          onClick={employHandler}
+        >
+          Ажилтан
+        </Button>
+        <Button
+          className={`text-black ${
+            employe ? "bg-transparent" : "bg-green-600"
+          } hover:bg-green-600 w-[50%] rounded-b-none rounded-l-none p-5 hover:bg-accent-none `}
+          onClick={clientHandler}
+        >
+          Хэрэглэгч
+        </Button>
       </div>
       <div className="w-[450px] border border-solid border-gray-300 p-6 flex flex-col gap-10  rounded-b-xl shadow-lg">
         <div className="text-center flex flex-col gap-3">

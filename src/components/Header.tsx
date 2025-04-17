@@ -22,7 +22,10 @@ export default function Header() {
           {/* Navigation Links */}
           {/* Action Buttons */}
           <div className="flex items-center gap-2.5">
-            <DropdownSignin />
+            <Link href="/login">
+              <p className="font-bold cursor-pointer">Нэвтрэх</p>
+            </Link>
+            {/* <DropdownSignin /> */}
 
             <DropdownSignup />
           </div>
