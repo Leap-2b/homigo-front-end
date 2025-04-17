@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 
 export const signIn = async (phone: number, password: string) => {
@@ -10,17 +10,18 @@ export const signIn = async (phone: number, password: string) => {
 
     const data = response.data;
     toast.success("Амжилттай нэвтэрлээ!");
-
     return data;
-  } catch (error: any) {
-    if (error.response) {
-      const data = error.response.data;
+  } catch (error: unknown) {
+    const axiosError = error as AxiosError;
+
+    if (axiosError.response) {
+      const data = axiosError.response.data as { message?: string };
       toast.error(data.message || "Нууц үг эсвэл утасны дугаар буруу.");
     } else {
       toast.error("Сервертэй холбогдож чадсангүй.");
     }
 
-    console.error("Axios error:", error);
+    console.error("Axios error:", axiosError);
     return null;
   }
 };
