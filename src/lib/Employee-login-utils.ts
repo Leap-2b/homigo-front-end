@@ -17,7 +17,6 @@ export const signIn = async (phone: number, password: string) => {
       const data = error.response.data;
       toast.error(data.message || "Нууц үг эсвэл утасны дугаар буруу.");
     } else {
-      // 🔥 Сүлжээний алдаа
       toast.error("Сервертэй холбогдож чадсангүй.");
     }
 
