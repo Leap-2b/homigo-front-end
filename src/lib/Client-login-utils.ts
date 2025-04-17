@@ -1,27 +1,27 @@
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 
-export const signIn = async (phone: string, password: string) => {
-  const router = useRouter();
+export const ClientsignIn = async (phone: number, password: string) => {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
-    const response = await axios.post(`${apiUrl}/signup`, {
-      phone,
-      password,
-    });
+    const response = await axios.post(
+      "http://localhost:8080/auth/client/sign-in",
+      { phone, password }
+    );
 
     const data = response.data;
+    toast.success("Амжилттай нэвтэрлээ!");
+    return data;
+  } catch (error: unknown) {
+    const axiosError = error as AxiosError;
 
-    if (data.error) {
-      toast.error(data.message || "Алдаа гарлаа.");
+    if (axiosError.response) {
+      const data = axiosError.response.data as { message?: string };
+      toast.error(data.message || "Нууц үг эсвэл утасны дугаар буруу.");
     } else {
-      toast.success("Бүртгэл амжилттай!");
-      router.push("/");
-      return data;
+      toast.error("Сервертэй холбогдож чадсангүй.");
     }
-  } catch (error) {
-    console.error("Бүртгүүлэх үед алдаа гарлаа:", error);
-    toast.error("Сервертэй холбогдох үед алдаа гарлаа.");
+
+    console.error("Axios error:", axiosError);
+    return null;
   }
 };
