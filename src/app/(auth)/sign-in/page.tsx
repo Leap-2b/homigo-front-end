@@ -19,7 +19,7 @@ export default function EnhancedLoginPage() {
   };
   const clientHandler = () => {};
   return (
-    <div className="min-h-screen bg-gradient-to-b mt-30 from-white to-gray-50">
+    <div className="min-h-[82vh] bg-gradient-to-b mt-30 from-white to-gray-50">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-teal-50 blur-3xl opacity-70"></div>

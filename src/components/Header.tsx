@@ -1,7 +1,9 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { DropdownSignin, DropdownSignup } from "./Dropdown";
 import { useUser } from "@/app/_context/UserContext";
+import { motion } from "framer-motion";
+import { Button } from "./ui/button";
 export default function Header() {
   // const { currentUser } = useUser();
   return (
@@ -13,21 +15,37 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <div className="relative flex items-center">
-              <img src="/Homigo.png" alt="" className="w-15 h-15 " />
+              <Image src="/Homigo.png" alt="" width={70} height={70} />
               <span className="text-gray-800 font-medium text-xl ml-3">
                 HomiGo
               </span>
             </div>
           </Link>
-          {/* Navigation Links */}
-          {/* Action Buttons */}
-          <div className="flex items-center gap-2.5">
-            <Link href="/login">
-              <p className="font-bold cursor-pointer">Нэвтрэх</p>
-            </Link>
-            {/* <DropdownSignin /> */}
-
-            <DropdownSignup />
+          <div className="flex gap-">
+            <motion.div
+              className="hidden md:flex items-center space-x-2"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Link href="/sign-in">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-gray-700 hover:text-gray-900 cursor-pointer"
+                >
+                  Нэвтрэх
+                </Button>
+              </Link>
+              <Link href="/sign-up">
+                <Button
+                  size="sm"
+                  className="bg-green-500 hover:bg-green-600 text-white cursor-pointer"
+                >
+                  Бүртгүүлэх
+                </Button>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </div>
