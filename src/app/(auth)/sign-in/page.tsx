@@ -11,17 +11,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { signIn } from "@/lib/Employee-login-utils";
 import { ClientsignIn } from "@/lib/Client-login-utils";
 
-
 export default function EnhancedLoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
 
   const employHandler = () => {
     signIn(Number(phoneNumber), password);
-
   };
   const clientHandler = () => {
-    ClientsignIn(Number(phoneNumber), password)
+    ClientsignIn(Number(phoneNumber), password);
   };
   return (
     <div className="min-h-[82vh] bg-gradient-to-b mt-30 from-white to-gray-50">
