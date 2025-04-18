@@ -47,7 +47,7 @@ export default function Footer() {
           {/* Contact Section */}
           <div className="flex flex-col gap-4">
             <h3 className="text-black text-lg font-semibold border-b border-gray-700 pb-2">
-              CONTACT US
+              Холбоо барих
             </h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3">

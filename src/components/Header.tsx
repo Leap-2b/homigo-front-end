@@ -30,9 +30,9 @@ export default function Header() {
         <div className="w-[90%] m-auto justify-between items-center px-4 py-3 flex ">
           <Link href="/" className="flex items-center">
             <div className="relative flex items-center">
-              <Image src="/Homigo.png" alt="" width={70} height={70} />
-              <span className="text-gray-800 font-medium text-xl ml-3">
-                HomiGo
+              <Image src="/logo.png" alt="" width={50} height={44} />
+              <span className="text-[#222] font-bold text-xl ml-3">
+                Homi-Go
               </span>
             </div>
           </Link>
