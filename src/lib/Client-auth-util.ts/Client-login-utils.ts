@@ -13,5 +13,6 @@ export const ClientsignIn = async (phone: number, password: string) => {
     .catch((error) => {
       console.log(error);
       toast.error(error.response.data.message);
+      throw new Error("aldaa garlaa");
     });
 };
