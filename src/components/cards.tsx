@@ -1,13 +1,4 @@
-import {
-  Monitor,
-  Square,
-  Smartphone,
-  Laptop,
-  House,
-  HouseIcon,
-  Package,
-} from "lucide-react";
-import Link from "next/link";
+import { Laptop, HouseIcon, Package } from "lucide-react";
 
 interface Category {
   id: string;

@@ -23,6 +23,7 @@ import {
   Shield,
   User,
 } from "lucide-react";
+import { EmployeeSignUp } from "@/lib/Employee-auth-utils.ts/Employee-sign-up-util";
 
 const EmployeSecondStep = ({
   setCurrentStep,
@@ -36,7 +37,6 @@ const EmployeSecondStep = ({
   email: string;
 }) => {
   const [category, setCategory] = useState<string>("");
-
   const formSchema = z
     .object({
       password: z.string().min(6, {
@@ -89,9 +89,18 @@ const EmployeSecondStep = ({
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    console.log(phoneNumber);
-    console.log(email);
+    EmployeeSignUp(
+      phoneNumber,
+      email,
+      values.password,
+      values.firstName,
+      values.lastName,
+      values.register,
+      values.address,
+      Number(values.secondPhone),
+      values.experience,
+      category
+    );
   }
 
   return (

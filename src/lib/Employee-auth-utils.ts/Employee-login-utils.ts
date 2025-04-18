@@ -1,10 +1,11 @@
+"use client";
 import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 
-export const ClientsignIn = async (phone: number, password: string) => {
+export const signIn = async (phone: number, password: string) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/auth/client/sign-in",
+      `http://localhost:8080/auth/employe/sign-in`,
       { phone, password }
     );
 

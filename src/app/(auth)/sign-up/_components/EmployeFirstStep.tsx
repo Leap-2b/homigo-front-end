@@ -23,8 +23,6 @@ import {
   MapPin,
   Phone,
   Shield,
-  User,
-  Star,
 } from "lucide-react";
 import Image from "next/image";
 

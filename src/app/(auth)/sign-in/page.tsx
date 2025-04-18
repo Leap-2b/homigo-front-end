@@ -8,18 +8,24 @@ import { Building2, Home, MapPin, Shield, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { signIn } from "@/lib/Employee-login-utils";
-import { ClientsignIn } from "@/lib/Client-login-utils";
+import { signIn } from "@/lib/Employee-auth-utils.ts/Employee-login-utils";
+import { ClientsignIn } from "@/lib/Client-auth-util.ts/Client-login-utils";
 
 export default function EnhancedLoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const employHandler = () => {
+    setLoading(true);
     signIn(Number(phoneNumber), password);
+    setLoading(false);
   };
+
   const clientHandler = () => {
+    setLoading(true);
     ClientsignIn(Number(phoneNumber), password);
+    setLoading(false);
   };
   return (
     <div className="min-h-[82vh] bg-gradient-to-b mt-30 from-white to-gray-50">
@@ -132,8 +138,9 @@ export default function EnhancedLoginPage() {
                     <Button
                       className="w-full bg-green-500 hover:bg-green-600"
                       onClick={employHandler}
+                      disabled={loading}
                     >
-                      Нэвтрэх
+                      {loading ? "loading..." : "Нэвтрэх"}
                     </Button>
                   </div>
 
@@ -221,8 +228,9 @@ export default function EnhancedLoginPage() {
                     <Button
                       className="w-full bg-green-500 hover:bg-green-600"
                       onClick={clientHandler}
+                      disabled={loading}
                     >
-                      Нэвтрэх
+                      {loading ? "loading..." : "Нэвтрэх"}
                     </Button>
                   </div>
 
