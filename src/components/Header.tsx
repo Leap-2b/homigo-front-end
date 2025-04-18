@@ -12,11 +12,16 @@ import {
 } from "@/components/ui/popover";
 import { LogOut, UserPen } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEmployee } from "@/app/_context/EmployeContext";
 export default function Header() {
-  const { currentUser } = useUser();
+  const { currentUser, setCurrentUser } = useUser();
+  const { currentEmploye, setCurrentEmploye } = useEmployee();
   const router = useRouter();
   const logoutHandler = () => {
     localStorage.removeItem("user");
+    setCurrentUser(null);
+    localStorage.removeItem("employe");
+    setCurrentEmploye(null);
     router.push("/sign-in");
   };
   return (
@@ -31,7 +36,7 @@ export default function Header() {
               </span>
             </div>
           </Link>
-          {currentUser ? (
+          {currentUser || currentEmploye ? (
             <Popover>
               <PopoverTrigger>
                 <Avatar className="cursor-pointer">

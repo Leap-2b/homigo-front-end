@@ -14,9 +14,9 @@ import { Loader } from "@/components/Loading";
 
 type UserContextType = {
   currentUser: userType | null;
-  setCurrentUser: Dispatch<userType>;
-  isReady: boolean
-  setIsReady: Dispatch<boolean>
+  setCurrentUser: Dispatch<userType | null>;
+  isReady: boolean;
+  setIsReady: Dispatch<boolean>;
 };
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
@@ -32,9 +32,10 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
+      console.log("its working");
       setCurrentUser(JSON.parse(user));
     }
-    setIsReady(true)
+    setIsReady(true);
   }, []);
 
   if (!isReady)
@@ -45,7 +46,9 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     );
 
   return (
-    <UserContext.Provider value={{ currentUser, setCurrentUser, isReady, setIsReady }}>
+    <UserContext.Provider
+      value={{ currentUser, setCurrentUser, isReady, setIsReady }}
+    >
       <Toaster position="top-center" richColors />
       {children}
     </UserContext.Provider>
