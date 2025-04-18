@@ -10,6 +10,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { signIn } from "@/lib/Employee-auth-utils.ts/Employee-login-utils";
 import { ClientsignIn } from "@/lib/Client-auth-util.ts/Client-login-utils";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/app/_context/UserContext";
+import { useEmployee } from "@/app/_context/EmployeContext";
 
 export default function EnhancedLoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -17,10 +19,14 @@ export default function EnhancedLoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const { setCurrentUser } = useUser();
+  const { setCurrentEmploye } = useEmployee();
+
   const employHandler = async () => {
     setLoading(true);
     try {
-      await signIn(Number(phoneNumber), password);
+      const employe = await signIn(Number(phoneNumber), password);
+      setCurrentEmploye(employe);
       router.push("/");
     } catch (error) {
       console.log("Хэрэглэгч нэвтрэх үед алдаа гарлаа:", error);
@@ -32,7 +38,8 @@ export default function EnhancedLoginPage() {
   const clientHandler = async () => {
     setLoading(true);
     try {
-      await ClientsignIn(Number(phoneNumber), password);
+      const user = await ClientsignIn(Number(phoneNumber), password);
+      setCurrentUser(user);
       router.push("/");
     } catch (error) {
       console.log("Хэрэглэгч нэвтрэх үед алдаа гарлаа", error);

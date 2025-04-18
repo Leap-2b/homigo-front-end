@@ -12,7 +12,7 @@ export const signIn = async (phone: number, password: string) => {
     const data = response.data.employe;
     toast.success("Амжилттай нэвтэрлээ!");
 
-    localStorage.setItem("user", JSON.stringify(data));
+    localStorage.setItem("employe", JSON.stringify(data));
     return data;
   } catch (error: unknown) {
     const axiosError = error as AxiosError;
