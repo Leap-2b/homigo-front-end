@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 
 export const EmployeeSignUp = async (
@@ -13,23 +13,36 @@ export const EmployeeSignUp = async (
   experience: string,
   category: string
 ) => {
-  axios
-    .post("http://localhost:8080/auth/employe/sign-up", {
-      phone,
-      email,
-      password,
-      firstName,
-      lastName,
-      register,
-      address,
-      secondPhone,
-      experience,
-      category,
-    })
-    .then((response) => {
-      console.log(response), toast.success("Амжилттай Бүртгэгдлээ");
-    })
-    .catch((error) => {
-      console.log(error), toast.error(error.data.message);
-    });
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/auth/employe/sign-up",
+      {
+        phone,
+        email,
+        password,
+        firstName,
+        lastName,
+        register,
+        address,
+        secondPhone,
+        experience,
+        category,
+      }
+    );
+    const data = response.data;
+    toast.success("Амжилттай Нэвтэрлээ");
+    return data;
+  } catch (error: unknown) {
+    const axiosError = error as AxiosError;
+
+    if (axiosError.response) {
+      const data = axiosError.response.data as { message?: string };
+      toast.error(data.message);
+    } else {
+      toast.error("Сервертэй холбогдож чадсангүй.");
+    }
+
+    console.error("Axios error:", axiosError);
+    throw new Error("aldaa garlaa");
+  }
 };
