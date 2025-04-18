@@ -25,13 +25,16 @@ import {
   User,
 } from "lucide-react";
 import Image from "next/image";
+import { userType } from "@/types/user";
 
 const EmployeFirstStep = ({
   setCurrentStep,
   currentStep,
+  setUser,
 }: {
   setCurrentStep: Dispatch<number>;
   currentStep: number;
+  setUser: Dispatch<userType>;
 }) => {
   const formSchema = z.object({
     phone: z.string().min(8, {
@@ -51,6 +54,10 @@ const EmployeFirstStep = ({
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    setUser({
+      phone: Number(values.phone),
+      userName: values.userName,
+    });
     setCurrentStep(currentStep + 1);
   }
 

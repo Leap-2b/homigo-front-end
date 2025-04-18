@@ -5,11 +5,13 @@ import EmployeSecondStep from "./_components/EmployeSecondStep";
 import ClientFirstStep from "./_components/ClientFirstStep";
 import ClientSecondStep from "./_components/ClientSecondStep";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { userType } from "@/types/user";
 
 const Page = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [phoneNumber, setPhoneNumber] = useState<number>(0);
   const [email, setEmail] = useState<string>("");
+  const [user, setUser] = useState<userType | null>(null);
   const EmployeSteps = [EmployeFirstStep, EmployeSecondStep][currentStep];
   const ClientSteps = [ClientFirstStep, ClientSecondStep][currentStep];
   return (
@@ -43,6 +45,8 @@ const Page = () => {
           <ClientSteps
             setCurrentStep={setCurrentStep}
             currentStep={currentStep}
+            user={user}
+            setUser={setUser}
           />
         </TabsContent>
       </Tabs>

@@ -5,7 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, User, User2, UserCircle } from "lucide-react";
+import { ChevronDown, User, UserCircle } from "lucide-react";
 import Link from "next/link";
 
 export function DropdownSignin() {

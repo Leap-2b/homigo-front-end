@@ -22,18 +22,20 @@ import {
   Lock,
   Mail,
   MapPin,
-  Phone,
   Shield,
-  User,
 } from "lucide-react";
 import Image from "next/image";
+import { userType } from "@/types/user";
+import { ClientSignUp } from "@/lib/Client-auth-util.ts/Client-sign-up-utils";
 
 const ClientSecondStep = ({
   setCurrentStep,
   currentStep,
+  user,
 }: {
   setCurrentStep: Dispatch<number>;
   currentStep: number;
+  user: userType | null;
 }) => {
   const formSchema = z.object({
     email: z.string().email({ message: "Зөв имэйл хаяг оруулна уу" }),
@@ -50,7 +52,11 @@ const ClientSecondStep = ({
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {}
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    if (user?.userName && user.phone) {
+      ClientSignUp(user.userName, values.email, user?.phone, values.password);
+    }
+  }
 
   return (
     <div className="">
