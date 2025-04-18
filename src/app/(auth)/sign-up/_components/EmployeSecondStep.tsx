@@ -24,6 +24,7 @@ import {
   User,
 } from "lucide-react";
 import { EmployeeSignUp } from "@/lib/Employee-auth-utils.ts/Employee-sign-up-util";
+import { useRouter } from "next/navigation";
 
 const EmployeSecondStep = ({
   setCurrentStep,
@@ -37,6 +38,7 @@ const EmployeSecondStep = ({
   email: string;
 }) => {
   const [category, setCategory] = useState<string>("");
+  const router = useRouter();
   const formSchema = z
     .object({
       password: z.string().min(6, {
@@ -88,19 +90,24 @@ const EmployeSecondStep = ({
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    EmployeeSignUp(
-      phoneNumber,
-      email,
-      values.password,
-      values.firstName,
-      values.lastName,
-      values.register,
-      values.address,
-      Number(values.secondPhone),
-      values.experience,
-      category
-    );
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await EmployeeSignUp(
+        phoneNumber,
+        email,
+        values.password,
+        values.firstName,
+        values.lastName,
+        values.register,
+        values.address,
+        Number(values.secondPhone),
+        values.experience,
+        category
+      );
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

@@ -27,6 +27,7 @@ import {
 import Image from "next/image";
 import { userType } from "@/types/user";
 import { ClientSignUp } from "@/lib/Client-auth-util.ts/Client-sign-up-utils";
+import { useRouter } from "next/navigation";
 
 const ClientSecondStep = ({
   setCurrentStep,
@@ -51,10 +52,26 @@ const ClientSecondStep = ({
       password: "",
     },
   });
+  const router = useRouter();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     if (user?.userName && user.phone) {
-      ClientSignUp(user.userName, values.email, user?.phone, values.password);
+      try {
+        await ClientSignUp(
+          user.userName,
+          values.email,
+          user.phone,
+          values.password
+        );
+
+        router.push("/");
+      } catch (error) {
+        console.error("Sign up error:", error);
+        form.setError("email", {
+          type: "manual",
+          message: "Бүртгүүлэх үед алдаа гарлаа. Дахин оролдоно уу.",
+        });
+      }
     }
   }
 
