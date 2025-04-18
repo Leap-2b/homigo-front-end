@@ -20,23 +20,16 @@ const categories: Category[] = [
     icon: "square",
     url: "/icons8.png",
   },
-  {
-    id: "office-marketing",
-    title: "Оффис цэвэрлэгээ бусад",
-    icon: "smartphone",
-    url: "/categories/digital-marketing",
-  },
 ];
 
 export default function CardSlider() {
   const renderIcon = (iconName: string) => {
     switch (iconName) {
       case "monitor":
-        return <Laptop className="w-[35px] h-[35px] stroke-1" />;
+        return "💻";
+
       case "square":
-        return <HouseIcon className="w-[31px] h-[31px] stroke-1" />;
-      case "smartphone":
-        return <Package className="w-[31px] h-[31px] stroke-1" />;
+        return "🏠";
     }
   };
 
@@ -45,16 +38,16 @@ export default function CardSlider() {
       <h1 className="text-3xl font-bold mb-8 text-[#222] ">
         Explore categories
       </h1>
-      <div className="flex gap-5 h-[130px] w-[120px] items-center">
+      <div className="flex  gap-5 w-300 items-center ">
         {categories.map((category) => {
           const titleParts = category.title.split("&");
           return (
             <div
               key={category.id}
-              className="bg-white flex flex-col p-5 gap-2 rounded-lg shadow-md w-[200px] h-full justify-center transition all ease-in
+              className="bg-white flex gap-5  p-5 items-center rounded-lg shadow-md w-[350px] h-16 justify-center transition all ease-in
  hover:-translate-y-1.5 hover:shadow-xl"
             >
-              <div className="flex flex-col justify-center">
+              <div className="flex flex-col justify-center ">
                 <div className="rounded-md">{renderIcon(category.icon)}</div>
               </div>
               <h2 className="font-semibold text-[14px] ">
