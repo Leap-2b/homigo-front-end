@@ -23,6 +23,6 @@ export const signIn = async (phone: number, password: string) => {
     }
 
     console.error("Axios error:", axiosError);
-    return null;
+    throw new Error("Алдаа гарлаа");
   }
 };
