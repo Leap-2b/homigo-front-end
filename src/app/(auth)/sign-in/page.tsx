@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -10,23 +9,38 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { signIn } from "@/lib/Employee-auth-utils.ts/Employee-login-utils";
 import { ClientsignIn } from "@/lib/Client-auth-util.ts/Client-login-utils";
+import { useRouter } from "next/navigation";
 
 export default function EnhancedLoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const employHandler = () => {
+  const employHandler = async () => {
     setLoading(true);
-    signIn(Number(phoneNumber), password);
-    setLoading(false);
+    try {
+      await signIn(Number(phoneNumber), password);
+      router.push("/");
+    } catch (error) {
+      console.log("Хэрэглэгч нэвтрэх үед алдаа гарлаа:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const clientHandler = () => {
+  const clientHandler = async () => {
     setLoading(true);
-    ClientsignIn(Number(phoneNumber), password);
-    setLoading(false);
+    try {
+      await ClientsignIn(Number(phoneNumber), password);
+      router.push("/");
+    } catch (error) {
+      console.log("Хэрэглэгч нэвтрэх үед алдаа гарлаа", error);
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
     <div className="min-h-[82vh] bg-gradient-to-b mt-30 from-white to-gray-50">
       {/* Background elements */}
