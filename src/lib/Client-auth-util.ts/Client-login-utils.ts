@@ -10,8 +10,10 @@ export const ClientsignIn = async (phone: number, password: string) => {
         password,
       }
     );
-    const data = response.data;
+    const data = response.data.user;
     toast.success("Амжилттай нэвтэрлээ!");
+    console.log(response);
+    localStorage.setItem("user", JSON.stringify(data));
     return data;
   } catch (error: unknown) {
     const axiosError = error as AxiosError;

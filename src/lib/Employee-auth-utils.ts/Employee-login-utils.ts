@@ -9,8 +9,10 @@ export const signIn = async (phone: number, password: string) => {
       { phone, password }
     );
 
-    const data = response.data;
+    const data = response.data.employe;
     toast.success("Амжилттай нэвтэрлээ!");
+
+    localStorage.setItem("user", JSON.stringify(data));
     return data;
   } catch (error: unknown) {
     const axiosError = error as AxiosError;
