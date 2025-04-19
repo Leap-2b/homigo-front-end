@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Building2,
+  Camera,
   CheckCircle,
   Home,
   MapPin,
@@ -25,7 +26,9 @@ import {
 } from "lucide-react";
 import { EmployeeSignUp } from "@/lib/Employee-auth-utils.ts/Employee-sign-up-util";
 import { useRouter } from "next/navigation";
-
+import Image from "next/image";
+const UPLOAD_PRESET = "food-delivery";
+const CLOUD_NAME = "duivg9iia";
 const EmployeSecondStep = ({
   setCurrentStep,
   currentStep,
@@ -38,6 +41,8 @@ const EmployeSecondStep = ({
   email: string;
 }) => {
   const [category, setCategory] = useState<string>("");
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const router = useRouter();
   const formSchema = z
     .object({
@@ -69,6 +74,9 @@ const EmployeSecondStep = ({
       category: z.string().min(2, {
         message: "Ажлын төрөл хамгийн багадаа 3 тэмдэгт байх ёстой.",
       }),
+      img: z.string().min(1, {
+        message: "Ажлын төрөл хамгийн багадаа 3 тэмдэгт байх ёстой.",
+      }),
     })
     .refine((data) => data.password === data.confirmPassword, {
       message: "Нууц үг таарахгүй байна.",
@@ -87,9 +95,41 @@ const EmployeSecondStep = ({
       secondPhone: "",
       experience: "",
       category: "",
+      img: "",
     },
   });
+  const uploadImage = async (file: File | null) => {
+    if (!file) {
+      return null;
+    }
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
 
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const result = await response.json();
+      return result.secure_url;
+    } catch (error: unknown) {
+      console.error("Failed to upload image:", error);
+      return null;
+    }
+  };
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setImageFile(file);
+      const tempImageUrl = URL.createObjectURL(file);
+      form.setValue("img", tempImageUrl);
+      setPreviewUrl(tempImageUrl);
+    }
+  };
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       await EmployeeSignUp(
@@ -117,7 +157,6 @@ const EmployeSecondStep = ({
         <div className="absolute top-1/4 -right-24 w-72 h-72 rounded-full bg-emerald-50 blur-3xl opacity-70"></div>
         <div className="absolute bottom-0 left-1/3 w-96 h-96 rounded-full bg-teal-50 blur-3xl opacity-60"></div>
 
-        {/* Animated floating elements */}
         <motion.div
           className="absolute top-[15%] left-[15%]"
           animate={{
@@ -169,13 +208,41 @@ const EmployeSecondStep = ({
       <div className="w-[550px] border border-gray-300 rounded-lg p-6 flex flex-col gap-10 shadow-lg">
         <div className="text-center flex flex-col gap-3">
           <p className="font-bold text-[25px]">Бүртгүүлэх</p>
-          <p className="text-gray-500">Мэдээллээ бөглөн үргэлжлүүлнэ үү</p>
+          <p className="text-gray-500">Мэдээллээ бөглөж үргэлжлүүлнэ үү</p>
         </div>
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
+          <div className="flex flex-col items-center mb-5 justify-center cursor-pointer">
+            <p className="text-sm mb-4">add</p>
+            <div className="relative">
+              <div
+                className="w-24 h-24 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center bg-gray-50 "
+                onClick={() => document.getElementById("photo-upload")?.click()}
+              >
+                {previewUrl ? (
+                  <Image
+                    src={previewUrl || "/placeholder.svg"}
+                    alt="Profile preview"
+                    width={96}
+                    height={96}
+                    className="w-full h-full rounded-full object-cover"
+                  />
+                ) : (
+                  <Camera className="text-gray-400" />
+                )}
+              </div>
+              <Input
+                id="photo-upload"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageChange}
+              />
+            </div>
+          </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <div className="flex gap-4">
