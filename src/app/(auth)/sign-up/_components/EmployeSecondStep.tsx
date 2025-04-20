@@ -144,7 +144,7 @@ const EmployeSecondStep = ({
         values.experience,
         category
       );
-      router.push("/");
+      router.push("/profile");
     } catch (error) {
       console.log(error);
     }
