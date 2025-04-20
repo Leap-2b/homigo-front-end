@@ -12,6 +12,7 @@ import React, {
 import { toast, Toaster } from "sonner";
 import { useUser } from "./UserContext";
 import { employeType } from "@/types/user";
+import { fetchAllEmployees } from "@/lib/get-all-category";
 type employeeContextType = {
   signUp: (
     phone: string,
@@ -28,6 +29,7 @@ type employeeContextType = {
   ) => void;
   currentEmploye: employeType | null;
   setCurrentEmploye: Dispatch<employeType | null>;
+  employees: employeType[] | null;
 };
 
 const employeeContext = createContext<employeeContextType>(
@@ -42,6 +44,7 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
   const [currentEmploye, setCurrentEmploye] = useState<employeType | null>(
     null
   );
+  const [employees, setEmployees] = useState<employeType[] | null>(null);
 
   const signUp = async (
     phone: string,
@@ -97,10 +100,19 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const employe = localStorage.getItem("employe");
     if (employe) {
-      console.log("its working");
       setCurrentEmploye(JSON.parse(employe));
     }
     setIsReady(true);
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data: employeType[] | undefined = await fetchAllEmployees();
+      if (data) {
+        setEmployees(data);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -109,7 +121,7 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
         signUp,
         currentEmploye,
         setCurrentEmploye,
-        // loading
+        employees,
       }}
     >
       <Toaster position="top-center" richColors />

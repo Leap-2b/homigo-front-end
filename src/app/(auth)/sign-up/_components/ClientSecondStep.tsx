@@ -1,5 +1,5 @@
 "use client";
-import React, { Dispatch } from "react";
+import React, { Dispatch, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,6 +28,7 @@ import Image from "next/image";
 import { userType } from "@/types/user";
 import { ClientSignUp } from "@/lib/Client-auth-util.ts/Client-sign-up-utils";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/app/_context/UserContext";
 
 const ClientSecondStep = ({
   setCurrentStep,
@@ -38,6 +39,9 @@ const ClientSecondStep = ({
   currentStep: number;
   user: userType | null;
 }) => {
+  const { setCurrentUser } = useUser();
+  const [loading, setLoading] = useState(false);
+
   const formSchema = z.object({
     email: z.string().email({ message: "Зөв имэйл хаяг оруулна уу" }),
     password: z.string().min(2, {
@@ -55,15 +59,16 @@ const ClientSecondStep = ({
   const router = useRouter();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
     if (user?.userName && user.phone) {
       try {
-        await ClientSignUp(
+        const client = await ClientSignUp(
           user.userName,
           values.email,
           user.phone,
           values.password
         );
-
+        setCurrentUser(client);
         router.push("/");
       } catch (error) {
         console.error("Sign up error:", error);
@@ -73,6 +78,7 @@ const ClientSecondStep = ({
         });
       }
     }
+    setLoading(false);
   }
 
   return (
@@ -200,8 +206,9 @@ const ClientSecondStep = ({
                   <Button
                     type="submit"
                     className="w-[48%] bg-green-500 hover:bg-green-600"
+                    disabled={loading}
                   >
-                    үргэлжлүүлэх
+                    {loading ? "loading..." : "үргэлжлүүлэх"}
                   </Button>
                 </div>
               </form>

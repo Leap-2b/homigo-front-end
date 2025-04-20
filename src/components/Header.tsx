@@ -24,6 +24,7 @@ export default function Header() {
     setCurrentEmploye(null);
     router.push("/sign-in");
   };
+
   return (
     <div className="w-full">
       <div className="w-full bg-white border-b sticky top-0 z-50">
@@ -41,7 +42,11 @@ export default function Header() {
               <PopoverTrigger>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
+                    src={
+                      currentEmploye?.img
+                        ? currentEmploye.img
+                        : "https://github.com/shadcn.png"
+                    }
                     alt="@shadcn"
                     className="rounded-full w-[40px] h-[40px]"
                   />

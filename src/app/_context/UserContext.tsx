@@ -32,7 +32,6 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      console.log("its working");
       setCurrentUser(JSON.parse(user));
     }
     setIsReady(true);
