@@ -27,6 +27,7 @@ import {
 import { EmployeeSignUp } from "@/lib/Employee-auth-utils.ts/Employee-sign-up-util";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useEmployee } from "@/app/_context/EmployeContext";
 const UPLOAD_PRESET = "food-delivery";
 const CLOUD_NAME = "duivg9iia";
 const EmployeSecondStep = ({
@@ -43,7 +44,10 @@ const EmployeSecondStep = ({
   const [category, setCategory] = useState<string>("");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { setCurrentEmploye } = useEmployee();
+
   const formSchema = z
     .object({
       password: z.string().min(6, {
@@ -61,6 +65,9 @@ const EmployeSecondStep = ({
       register: z.string().regex(/^[А-ЯӨҮ]{2}\d{8}$/, {
         message:
           "Регистрийн дугаар нь эхэндээ 2 кирилл үсэг, дараа нь 8 оронтой тоо байх ёстой.",
+      }),
+      about: z.string().min(3, {
+        message: "Хаяг хамгийн багадаа 3 тэмдэгт байх ёстой.",
       }),
       address: z.string().min(3, {
         message: "Хаяг хамгийн багадаа 3 тэмдэгт байх ёстой.",
@@ -91,6 +98,7 @@ const EmployeSecondStep = ({
       firstName: "",
       lastName: "",
       register: "",
+      about: "",
       address: "",
       secondPhone: "",
       experience: "",
@@ -130,24 +138,38 @@ const EmployeSecondStep = ({
       setPreviewUrl(tempImageUrl);
     }
   };
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
     try {
-      await EmployeeSignUp(
+      // Зураг upload хийх
+      const imageUrl = await uploadImage(imageFile);
+
+      if (!imageUrl) {
+        alert("Зураг амжилттай upload хийгдээгүй байна.");
+        return;
+      }
+
+      const employee = await EmployeeSignUp(
         phoneNumber,
         email,
         values.password,
         values.firstName,
         values.lastName,
         values.register,
+        values.about,
         values.address,
         Number(values.secondPhone),
         values.experience,
-        category
+        category,
+        imageUrl
       );
+    setCurrentEmploye(employee);
       router.push("/profile");
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   }
 
   return (
@@ -216,7 +238,7 @@ const EmployeSecondStep = ({
           transition={{ duration: 0.5 }}
         >
           <div className="flex flex-col items-center mb-5 justify-center cursor-pointer">
-            <p className="text-sm mb-4">add</p>
+            <p className="text-sm mb-4 font-bold">Зураг оруулах</p>
             <div className="relative">
               <div
                 className="w-24 h-24 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center bg-gray-50 "
@@ -341,6 +363,20 @@ const EmployeSecondStep = ({
 
               <FormField
                 control={form.control}
+                name="about"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Миний тухай</FormLabel>
+                    <FormControl>
+                      <Textarea placeholder="Өөрийнхөө товч танилцуулга" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
                 name="address"
                 render={({ field }) => (
                   <FormItem className="w-full">
@@ -360,7 +396,7 @@ const EmployeSecondStep = ({
                   <FormItem className="w-full">
                     <FormLabel>Ажлын туршлага</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Туршлага" {...field} />
+                      <Input placeholder="Жишээ нь: 1 жил" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -383,7 +419,7 @@ const EmployeSecondStep = ({
                         }}
                       >
                         <option value="">Сонгох</option>
-                        <option value="IT">IT Компьютер засвар</option>
+                        <option value="IT">Компьютер засвар</option>
                         <option value="CLEANER">Цэвэрлэгч</option>
                       </select>
                     </FormControl>
@@ -402,8 +438,9 @@ const EmployeSecondStep = ({
                 <Button
                   type="submit"
                   className=" bg-green-600 h-[48px] w-[48%]"
+                  disabled={loading}
                 >
-                  Үргэлжлүүлэх
+                  {loading ? "loading..." : "Үргэлжлүүлэх"}
                 </Button>
               </div>
             </form>
