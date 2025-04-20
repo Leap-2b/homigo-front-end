@@ -18,6 +18,7 @@ export const ClientSignUp = async (
       }
     );
     const data = response.data;
+    localStorage.setItem("user", JSON.stringify(data));
     toast.success("Амжилттай нэвтэрлээ!");
     return data;
   } catch (error: unknown) {

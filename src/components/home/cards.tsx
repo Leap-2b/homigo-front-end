@@ -1,5 +1,3 @@
-import { Laptop, HouseIcon, Package } from "lucide-react";
-
 interface Category {
   id: string;
   title: string;

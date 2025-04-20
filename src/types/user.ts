@@ -7,16 +7,26 @@ export type userType = {
   role?: string;
 };
 export type employeType = {
-  id?: number;
-  phone?: number;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  register: string;
+  about: string;
   address: string;
-  secondPhone: string;
-  experience: string;
   category: string;
-  products?: string;
+  email: string;
+  experience: string;
+  firstName: string;
+  img: string;
+  lastName: string;
+  password: string;
+  phone: number;
+  products: productsType;
+  register: string;
+  secondPhone: string;
+  __v: number;
+  _id: string;
+};
+
+export type productsType = {
+  description: string;
+  name: string;
+  price: number;
+  _id: number;
 };

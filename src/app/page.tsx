@@ -1,4 +1,4 @@
-import Category from "@/components/Category";
+import Category from "@/components/home/Category";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/Navbarr";
 
