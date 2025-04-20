@@ -15,7 +15,7 @@ const Page = () => {
   const EmployeSteps = [EmployeFirstStep, EmployeSecondStep][currentStep];
   const ClientSteps = [ClientFirstStep, ClientSecondStep][currentStep];
   return (
-    <div className="w-screen h-[85vh] flex flex-col justify-center items-center">
+    <div className="w-screen mt-6 flex flex-col justify-center items-center">
       <Tabs defaultValue="client" className="w-[550px]">
         <TabsList className="w-full grid grid-cols-2">
           <TabsTrigger

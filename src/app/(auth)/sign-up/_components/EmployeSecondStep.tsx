@@ -164,8 +164,8 @@ const EmployeSecondStep = ({
         category,
         imageUrl
       );
-      setCurrentEmploye(employee);
-      router.push("/");
+    setCurrentEmploye(employee);
+      router.push("/profile");
     } catch (error) {
       console.log(error);
     }
