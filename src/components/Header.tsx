@@ -61,7 +61,11 @@ export default function Header() {
                     </div>
                     <p className="font-bold">Profile</p>
                   </div>
-                )}
+
+                  <Link href={"/profile"}>
+                    <p className="font-bold">Profile</p>
+                  </Link>
+                </div>
                 <div
                   className="flex gap-5 items-center cursor-pointer"
                   onClick={logoutHandler}
