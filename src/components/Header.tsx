@@ -13,10 +13,12 @@ import {
 import { LogOut, UserPen } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEmployee } from "@/app/_context/EmployeContext";
+
 export default function Header() {
   const { currentUser, setCurrentUser } = useUser();
   const { currentEmploye, setCurrentEmploye } = useEmployee();
   const router = useRouter();
+
   const logoutHandler = () => {
     localStorage.removeItem("user");
     setCurrentUser(null);
@@ -28,15 +30,16 @@ export default function Header() {
   return (
     <div className="w-full">
       <div className="w-full bg-white border-b sticky top-0 z-50">
-        <div className="w-[90%] m-auto justify-between items-center px-4 py-3 flex ">
+        <div className="w-[90%] m-auto justify-between items-center px-4 py-3 flex">
           <Link href="/" className="flex items-center">
             <div className="relative flex items-center">
-              <Image src="/logo.png" alt="" width={50} height={44} />
+              <Image src="/logo.png" alt="logo" width={50} height={44} />
               <span className="text-[#222] font-bold text-xl ml-3">
                 Homi-Go
               </span>
             </div>
           </Link>
+
           {currentUser || currentEmploye ? (
             <Popover>
               <PopoverTrigger>
@@ -47,30 +50,30 @@ export default function Header() {
                         ? currentEmploye.img
                         : "https://github.com/shadcn.png"
                     }
-                    alt="@shadcn"
+                    alt="profile-image"
                     className="rounded-full w-[40px] h-[40px]"
                   />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
               </PopoverTrigger>
+
               <PopoverContent className="flex flex-col gap-3 w-[200px]">
                 {currentEmploye && !currentUser && (
-                  <div className="flex gap-5 items-center cursor-pointer">
-                    <div className="bg-gray-200 p-3 w-[40px] h-[40px] rounded-full flex justify-center items-center">
-                      <UserPen />
-                    </div>
-                    <p className="font-bold">Profile</p>
-                  </div>
-
                   <Link href={"/profile"}>
-                    <p className="font-bold">Profile</p>
+                    <div className="flex gap-4 items-center cursor-pointer">
+                      <div className="bg-gray-200 p-3 w-[40px] h-[40px] rounded-full flex justify-center items-center">
+                        <UserPen />
+                      </div>
+                      <p className="font-bold">Profile</p>
+                    </div>
                   </Link>
-                </div>
+                )}
+
                 <div
-                  className="flex gap-5 items-center cursor-pointer"
+                  className="flex gap-4 items-center cursor-pointer"
                   onClick={logoutHandler}
                 >
-                  <div className="bg-gray-200 p-3 w-[40px] h-[40px] rounded-full flex justify-center items-center ">
+                  <div className="bg-gray-200 p-3 w-[40px] h-[40px] rounded-full flex justify-center items-center">
                     <LogOut className="w-[20px] h-[20px]" />
                   </div>
                   <p className="font-bold">Log Out</p>
@@ -78,7 +81,7 @@ export default function Header() {
               </PopoverContent>
             </Popover>
           ) : (
-            <div className="flex gap-">
+            <div className="flex gap-3">
               <motion.div
                 className="hidden md:flex items-center space-x-2"
                 initial={{ opacity: 0, x: 20 }}
