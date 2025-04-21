@@ -58,8 +58,9 @@ export default function Header() {
                   <div className="bg-gray-200 p-3 w-[40px] h-[40px] rounded-full flex justify-center items-center">
                     <UserPen />
                   </div>
-
-                  <p className="font-bold">Profile</p>
+                  <Link href={"/profile"}>
+                    <p className="font-bold">Profile</p>
+                  </Link>
                 </div>
                 <div
                   className="flex gap-5 items-center cursor-pointer"
