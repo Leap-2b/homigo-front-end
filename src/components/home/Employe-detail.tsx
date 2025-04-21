@@ -9,7 +9,7 @@ export default async function EmployeDetail() {
   const data: employeType[] | undefined = await fetchAllEmployees();
 
   return (
-    <section>
+    <section className="w-[80vw]">
       <div className="flex justify-between items-center mb-6 w-[80vw]">
         <h2 className="text-2xl font-bold">Бүх мэргэжилтнүүд</h2>
         <span className="font-bold">{data?.EmployWithProducts.length}</span>
