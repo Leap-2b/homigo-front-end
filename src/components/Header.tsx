@@ -50,7 +50,7 @@ export default function Header() {
                     alt="@shadcn"
                     className="rounded-full w-[40px] h-[40px]"
                   />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarFallback>un</AvatarFallback>
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent className="flex flex-col gap-3 w-[200px]">
