@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -16,12 +15,12 @@ const NavBar = () => {
           <div className="relative flex-grow">
             <Input
               type="text"
-              placeholder="Search Category"
+              placeholder="Ангилал хайх"
               className="w-full px-4 py-3 rounded-l-md focus:outline-none"
             />
           </div>
           <Button className="bg-green-500 text-white px-6 py-3 rounded-r-md hover:bg-green-600 transition-colors">
-            Click
+            Энд дарна уу
           </Button>
         </div>
       </div>

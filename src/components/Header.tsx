@@ -64,7 +64,7 @@ export default function Header() {
                       <div className="bg-gray-200 p-3 w-[40px] h-[40px] rounded-full flex justify-center items-center">
                         <UserPen />
                       </div>
-                      <p className="font-bold">Profile</p>
+                      <p className="font-bold">Профайл</p>
                     </div>
                   </Link>
                 )}
@@ -76,7 +76,7 @@ export default function Header() {
                   <div className="bg-gray-200 p-3 w-[40px] h-[40px] rounded-full flex justify-center items-center">
                     <LogOut className="w-[20px] h-[20px]" />
                   </div>
-                  <p className="font-bold">Log Out</p>
+                  <p className="font-bold">Гарах</p>
                 </div>
               </PopoverContent>
             </Popover>
