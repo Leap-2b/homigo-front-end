@@ -33,9 +33,7 @@ export default function CardSlider() {
 
   return (
     <main className="py-16 flex flex-col w-[80vw]">
-      <h1 className="text-3xl font-bold mb-8 text-[#222] ">
-        Explore categories
-      </h1>
+      <h1 className="text-3xl font-bold mb-8 text-[#222] ">Ангиллуудыг үзэх</h1>
       <div className="flex  gap-5 w-300 items-center ">
         {categories.map((category) => {
           const titleParts = category.title.split("&");
