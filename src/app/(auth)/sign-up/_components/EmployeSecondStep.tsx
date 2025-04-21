@@ -164,8 +164,8 @@ const EmployeSecondStep = ({
         category,
         imageUrl
       );
-    setCurrentEmploye(employee);
-      router.push("/profile");
+      setCurrentEmploye(employee);
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -368,7 +368,10 @@ const EmployeSecondStep = ({
                   <FormItem className="w-full">
                     <FormLabel>Миний тухай</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Өөрийнхөө товч танилцуулга" {...field} />
+                      <Textarea
+                        placeholder="Өөрийнхөө товч танилцуулга"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
