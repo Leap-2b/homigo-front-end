@@ -54,10 +54,14 @@ export default function Header() {
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent className="flex flex-col gap-3 w-[200px]">
-                <div className="flex gap-5 items-center cursor-pointer">
-                  <div className="bg-gray-200 p-3 w-[40px] h-[40px] rounded-full flex justify-center items-center">
-                    <UserPen />
+                {currentEmploye && !currentUser && (
+                  <div className="flex gap-5 items-center cursor-pointer">
+                    <div className="bg-gray-200 p-3 w-[40px] h-[40px] rounded-full flex justify-center items-center">
+                      <UserPen />
+                    </div>
+                    <p className="font-bold">Profile</p>
                   </div>
+
                   <Link href={"/profile"}>
                     <p className="font-bold">Profile</p>
                   </Link>
