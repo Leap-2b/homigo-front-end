@@ -1,10 +1,6 @@
-import EmployeProfile from "./_components/Employe-profile";
+// app/profile/page.tsx
+import EmployeProfile from "@/app/profile/_components/EmployeProfile";
 
-
-export default function Home() {
-  return (
-    <div>
-     <EmployeProfile />
-    </div>
-  );
+export default function ProfilePage() {
+  return <EmployeProfile />;
 }
