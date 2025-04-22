@@ -25,7 +25,7 @@ export default function EmployeeProfilePage() {
 
   const { employees } = useEmployee();
 
-  const employee = employees?.EmployWithProducts?.find(
+  const employee = employees?.find(
     (employee) => employee._id == id
   );
 
@@ -33,6 +33,7 @@ export default function EmployeeProfilePage() {
     return (
       <div className="text-center py-20">
         <h1 className="text-2xl font-bold">Ажилтан олдсонгүй</h1>
+        <p>{id}</p>
       </div>
     );
   }

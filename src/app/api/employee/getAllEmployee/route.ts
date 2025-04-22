@@ -1,0 +1,17 @@
+import { EmployeModel } from "@/app/models/employe-model";
+import { NextResponse } from "next/server";
+import { connectMongoDb } from "../../../../../utils/server/db";
+export async function GET(req: Request): Promise<Response> {
+  await connectMongoDb();
+  try {
+    const EmployWithProducts = await EmployeModel.find().populate("products");
+    return new NextResponse(
+      JSON.stringify({ message: "Амжилттай", EmployWithProducts }),
+      { status: 200 }
+    );
+  } catch (error) {
+    return new NextResponse(JSON.stringify({ error: "алдаа гарлаа" }), {
+      status: 500,
+    });
+  }
+}

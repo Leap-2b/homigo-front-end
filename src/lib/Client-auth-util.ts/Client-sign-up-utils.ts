@@ -9,7 +9,7 @@ export const ClientSignUp = async (
 ) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/auth/users/sign-up",
+      "/api/user/sign-up",
       {
         userName,
         email,

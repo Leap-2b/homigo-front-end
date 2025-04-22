@@ -5,18 +5,15 @@ export const fetchAllEmployees = async (): Promise<
   employeType[] | undefined
 > => {
   try {
-    const { data } = await axios.get<employeType[]>(
-      "http://localhost:8080/auth/employe"
-    );
+    const { data } = await axios.get("/api/employee/getAllEmployee");
 
-    if (data) return data;
+    if (data) return data.EmployWithProducts;
     throw new Error("No data received");
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error("Axios error:", error.response?.data || error.message);
+      console.log("Axios error:", error);
     } else {
-      console.error("Unknown error:", error);
+      console.log("Unknown error:", error);
     }
-    return undefined;
   }
 };
