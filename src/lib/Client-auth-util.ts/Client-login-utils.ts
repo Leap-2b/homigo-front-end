@@ -3,16 +3,13 @@ import { toast } from "sonner";
 
 export const ClientsignIn = async (phone: number, password: string) => {
   try {
-    const response = await axios.post(
-      "http://localhost:8080/auth/users/sign-in",
-      {
-        phone,
-        password,
-      }
-    );
+    const response = await axios.post("/api/user/sign-in", {
+      phone,
+      password,
+    });
     const data = response.data.user;
     toast.success("Амжилттай нэвтэрлээ!");
-
+    console.log("ajillaa", data);
     localStorage.setItem("user", JSON.stringify(data));
     return data;
   } catch (error: unknown) {

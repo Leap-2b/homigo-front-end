@@ -17,7 +17,7 @@ export const EmployeeSignUp = async (
 ) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/auth/employe/sign-up",
+      "/api/employee/sign-up",
       {
         phone,
         email,

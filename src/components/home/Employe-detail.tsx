@@ -1,22 +1,22 @@
+"use client";
 import { Heart } from "lucide-react";
 import { Card } from "../ui/card";
 import Link from "next/link";
-import { fetchAllEmployees } from "@/lib/get-all-category";
-import { employeType } from "@/types/user";
 import Image from "next/image";
+import { useEmployee } from "@/app/_context/EmployeContext";
 
-export default async function EmployeDetail() {
-  const data: employeType[] | undefined = await fetchAllEmployees();
+export default function EmployeDetail() {
+  const { employees } = useEmployee();
 
   return (
     <section className="w-[80vw]">
       <div className="flex justify-between items-center mb-6 w-[80vw]">
         <h2 className="text-2xl font-bold">Бүх мэргэжилтнүүд</h2>
-        <span className="font-bold">{data?.EmployWithProducts.length}</span>
+        <span className="font-bold">{employees?.length}</span>
       </div>
 
       <div className="flex gap-10 mb-10 flex-wrap">
-        {data?.EmployWithProducts.map((employee) => {
+        {employees?.map((employee) => {
           return (
             <Link href={`employee-detail/${employee._id}`} key={employee._id}>
               <Card className="overflow-hidden border border-gray-200 w-90 h-90">

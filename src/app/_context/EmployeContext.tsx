@@ -12,7 +12,7 @@ import React, {
 import { toast, Toaster } from "sonner";
 import { useUser } from "./UserContext";
 import { employeType } from "@/types/user";
-import { fetchAllEmployees } from "@/lib/get-all-category";
+import { fetchAllEmployees } from "@/lib/get-all-employe";
 type employeeContextType = {
   signUp: (
     phone: string,

@@ -4,10 +4,10 @@ import { toast } from "sonner";
 
 export const signIn = async (phone: number, password: string) => {
   try {
-    const response = await axios.post(
-      `http://localhost:8080/auth/employe/sign-in`,
-      { phone, password }
-    );
+    const response = await axios.post(`/api/employee/sign-in`, {
+      phone,
+      password,
+    });
 
     const data = response.data.employe;
     toast.success("Амжилттай нэвтэрлээ!");
