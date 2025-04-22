@@ -7,8 +7,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-import { CameraIcon } from "lucide-react";
+import {
+  Upload,
+  Facebook,
+  ChromeIcon as Google,
+  CameraIcon,
+} from "lucide-react";
 
 export default function EmployeProfile() {
   const [activeTab, setActiveTab] = useState("personal");
@@ -175,9 +187,9 @@ export default function EmployeProfile() {
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                       className="lucide lucide-facebook h-4 w-4 text-blue-600"
                     >
                       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
@@ -286,9 +298,9 @@ export default function EmployeProfile() {
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                       className="lucide lucide-facebook h-4 w-4 text-blue-600"
                     >
                       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
