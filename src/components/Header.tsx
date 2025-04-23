@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useUser } from "@/app/_context/UserContext";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
+import { ChevronDown } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import {
   Popover,
@@ -48,7 +49,15 @@ export default function Header() {
           </Link>
 
           <Dialog>
-            <DialogTrigger>Үйлчилгээ</DialogTrigger>
+            <DialogTrigger asChild>
+              <Button
+                variant="outline"
+                className="text-sm font-semibold rounded-xl border-gray-300 hover:bg-gray-100 transition-all flex items-center gap-2"
+              >
+                Манай үйлчилгээ
+                <ChevronDown className="w-4 h-4 text-gray-500" />
+              </Button>
+            </DialogTrigger>
             <DialogContent>
               <DialogTitle></DialogTitle>
               <EmployeService />
