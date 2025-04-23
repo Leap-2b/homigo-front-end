@@ -24,12 +24,12 @@ import {
   Shield,
   User,
 } from "lucide-react";
-import { EmployeeSignUp } from "@/lib/Employee-auth-utils.ts/Employee-sign-up-util";
+import { EmployeeSignUp } from "@/lib/Employee-auth/employee-sign-up-util";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useEmployee } from "@/app/_context/EmployeContext";
-const UPLOAD_PRESET = "food-delivery";
-const CLOUD_NAME = "duivg9iia";
+import { uploadImage } from "@/lib/handle-upload";
+
 const EmployeSecondStep = ({
   setCurrentStep,
   currentStep,
@@ -42,6 +42,8 @@ const EmployeSecondStep = ({
   email: string;
 }) => {
   const [category, setCategory] = useState<string>("");
+  const [experience, setExperience] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
@@ -75,14 +77,14 @@ const EmployeSecondStep = ({
       secondPhone: z.string().min(3, {
         message: "Утасны дугаар хамгийн багадаа 3 тэмдэгт байх ёстой.",
       }),
-      experience: z.string().min(3, {
-        message: "Туршлага хамгийн багадаа 3 тэмдэгт байх ёстой.",
+      experience: z.string().min(1, {
+        message: "Туршлага хамгийн багадаа 1 тэмдэгт байх ёстой.",
       }),
       category: z.string().min(2, {
-        message: "Ажлын төрөл хамгийн багадаа 3 тэмдэгт байх ёстой.",
+        message: "Ажлын төрөл хамгийн багадаа 2 тэмдэгт байх ёстой.",
       }),
       img: z.string().min(1, {
-        message: "Ажлын төрөл хамгийн багадаа 3 тэмдэгт байх ёстой.",
+        message: "Ажлын төрөл хамгийн багадаа 1 тэмдэгт байх ёстой.",
       }),
     })
     .refine((data) => data.password === data.confirmPassword, {
@@ -106,29 +108,7 @@ const EmployeSecondStep = ({
       img: "",
     },
   });
-  const uploadImage = async (file: File | null) => {
-    if (!file) {
-      return null;
-    }
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", UPLOAD_PRESET);
 
-    try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const result = await response.json();
-      return result.secure_url;
-    } catch (error: unknown) {
-      console.error("Failed to upload image:", error);
-      return null;
-    }
-  };
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
@@ -142,7 +122,6 @@ const EmployeSecondStep = ({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
     try {
-      // Зураг upload хийх
       const imageUrl = await uploadImage(imageFile);
 
       if (!imageUrl) {
@@ -158,9 +137,9 @@ const EmployeSecondStep = ({
         values.lastName,
         values.register,
         values.about,
-        values.address,
+        address,
         Number(values.secondPhone),
-        values.experience,
+        experience,
         category,
         imageUrl
       );
@@ -385,7 +364,20 @@ const EmployeSecondStep = ({
                   <FormItem className="w-full">
                     <FormLabel>Гэрийн хаяг</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Хаяг" {...field} />
+                      <select
+                        className="w-full p-2 border rounded-md"
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e.target.value);
+                          setAddress(e.target.value);
+                        }}
+                      >
+                        <option value="">Сонгох</option>
+                        <option value="Улаанбаатар">Улаанбаатар</option>
+                        <option value="Хөдөө орон нутаг">
+                          Хөдөө орон нутаг
+                        </option>
+                      </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -397,9 +389,23 @@ const EmployeSecondStep = ({
                 name="experience"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Ажлын туршлага</FormLabel>
+                    <FormLabel>Ажлын Туршлага</FormLabel>
                     <FormControl>
-                      <Input placeholder="Жишээ нь: 1 жил" {...field} />
+                      <select
+                        className="w-full p-2 border rounded-md"
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e.target.value);
+                          setExperience(e.target.value);
+                        }}
+                      >
+                        <option value="">Сонгох</option>
+                        <option value="1 4жил">1жил</option>
+                        <option value="2 4жил">2жил</option>
+                        <option value="3 4жил">3жил</option>
+                        <option value="4 4жил">4жил</option>
+                        <option value="5+ жил">5+ жил</option>
+                      </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

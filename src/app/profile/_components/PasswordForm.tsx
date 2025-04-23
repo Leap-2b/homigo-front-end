@@ -17,16 +17,9 @@ import { SocialLoginButtons } from "./SocialLoginButtons";
 
 const passwordFormSchema = z
   .object({
-    newPassword: z
-      .string()
-      .min(8, "Нууц үг 8-аас олон тэмдэгттэй байх ёстой")
-      .regex(/[A-Z]/, "Нууц үг дор хаяж нэг том үсэг агуулсан байх ёстой")
-      .regex(/[a-z]/, "Нууц үг дор хаяж нэг жижиг үсэг агуулсан байх ёстой")
-      .regex(/[0-9]/, "Нууц үг дор хаяж нэг тоо агуулсан байх ёстой")
-      .regex(
-        /[^A-Za-z0-9]/,
-        "Нууц үг дор хаяж нэг тусгай тэмдэгт агуулсан байх ёстой"
-      ),
+    newPassword: z.string().min(6, {
+      message: "Нууц үг хамгийн багадаа 6 тэмдэгт байх ёстой.",
+    }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
@@ -38,9 +31,10 @@ type PasswordFormValues = z.infer<typeof passwordFormSchema>;
 
 interface PasswordFormProps {
   onSubmit: (values: PasswordFormValues) => void;
+  loading: boolean;
 }
 
-export const PasswordForm = ({ onSubmit }: PasswordFormProps) => {
+export const PasswordForm = ({ onSubmit, loading }: PasswordFormProps) => {
   const form = useForm<PasswordFormValues>({
     resolver: zodResolver(passwordFormSchema),
     defaultValues: {
@@ -87,8 +81,9 @@ export const PasswordForm = ({ onSubmit }: PasswordFormProps) => {
             <Button
               type="submit"
               className="w-full bg-green-500 hover:bg-green-600 text-white"
+              disabled={loading}
             >
-              Хадгалах
+              {loading ? "loading..." : "Хадгалах"}
             </Button>
           </div>
         </form>

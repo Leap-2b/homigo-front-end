@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { userType } from "@/types/user";
-import { ClientSignUp } from "@/lib/Client-auth-util.ts/Client-sign-up-utils";
+import { ClientSignUp } from "@/lib/Client-auth/client-sign-up-utils";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/app/_context/UserContext";
 

@@ -11,7 +11,7 @@ const CLOUD_NAME = "duivg9iia";
 
 export const ProfilePictureUpload = () => {
   const { currentEmploye } = useEmployee();
-  console.log("medeeeleell!!!!!!!", currentEmploye);
+
   const {
     register,
     setValue,

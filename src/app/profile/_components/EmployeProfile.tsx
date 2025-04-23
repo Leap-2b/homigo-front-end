@@ -8,9 +8,14 @@ import { PasswordForm } from "./PasswordForm";
 import { AdditionalInfoForm } from "./AdditionalInfoForm";
 import { toast } from "sonner";
 import { PersonalInfoForm } from "./PersonalInfoForm";
+import { changePassword } from "@/lib/profile/change-password-util";
+import { useEmployee } from "@/app/_context/EmployeContext";
+import { changeAdditionallinfo } from "@/lib/profile/change-additionalI-info";
 
 export default function EmployeProfile() {
   const [activeTab, setActiveTab] = useState("personal");
+  const { currentEmploye } = useEmployee();
+  const [loading, setLoading] = useState(false);
 
   const onPersonalSubmit = (values: any) => {
     console.log("Personal form submitted:", values);
@@ -18,12 +23,33 @@ export default function EmployeProfile() {
   };
 
   const onPasswordSubmit = (values: any) => {
-    console.log("Password form submitted", values);
-    toast.success("Нууц үг амжилттай шинэчлэгдлээ");
+    setLoading(true);
+    if (currentEmploye) {
+      changePassword(currentEmploye?._id, values.newPassword);
+      toast.success("Нууц үг амжилттай шинэчлэгдлээ");
+    }
+    setLoading(false);
   };
 
   const onAdditionalSubmit = (values: any) => {
-    console.log("Additional info submitted:", values);
+    if (currentEmploye) {
+      console.log(
+        currentEmploye?._id,
+        values.registerNumber,
+        values.phoneNumber,
+        values.address,
+        values.experience,
+        values.secondPhone
+      );
+      changeAdditionallinfo(
+        currentEmploye?._id,
+        values.registerNumber,
+        values.phoneNumber,
+        values.address,
+        values.experience,
+        values.secondPhone
+      );
+    }
     toast("Бусад мэдээлэл амжилттай хадгалагдлаа");
   };
 
@@ -66,11 +92,11 @@ export default function EmployeProfile() {
             </TabsContent>
 
             <TabsContent value="password">
-              <PasswordForm onSubmit={onPasswordSubmit} />
+              <PasswordForm onSubmit={onPasswordSubmit} loading={loading} />
             </TabsContent>
 
             <TabsContent value="payment">
-              <AdditionalInfoForm onSubmit={onAdditionalSubmit} />
+              <AdditionalInfoForm onSubmit={onAdditionalSubmit} currentEmploye={currentEmploye} />
             </TabsContent>
           </CardContent>
         </Card>

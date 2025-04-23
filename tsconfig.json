@@ -22,6 +22,15 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/employee/getAllEmployee", "src/app/api/product/create-product"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/api/employee/getAllEmployee",
+    "src/app/api/product/create-product",
+    "src/lib/Employee-auth",
+    "src/lib/Client-auth"
+  ],
   "exclude": ["node_modules"]
 }

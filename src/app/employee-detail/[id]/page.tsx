@@ -8,14 +8,22 @@ import {
   Star,
   MapPin,
   Calendar,
-  MessageCircle,
   Heart,
   Share2,
   ChevronLeft,
+  Handshake,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEmployee } from "@/app/_context/EmployeContext";
+import Order from "../_components/Order";
+import { productsType } from "@/types/user";
 
 export default function EmployeeProfilePage() {
   const params = useParams();
@@ -25,9 +33,8 @@ export default function EmployeeProfilePage() {
 
   const { employees } = useEmployee();
 
-  const employee = employees?.find(
-    (employee) => employee._id == id
-  );
+  const employee = employees?.find((employee) => employee._id == id);
+  console.log(employee?.products);
 
   if (!employee) {
     return (
@@ -152,10 +159,18 @@ export default function EmployeeProfilePage() {
                   </div>
 
                   <div className="mt-6">
-                    <Button className="w-full md:w-auto">
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      Холбогдох
-                    </Button>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button className="w-full md:w-auto">
+                          <Handshake className="w-5 h-5 " />
+                          Захиалах
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogTitle></DialogTitle>
+                        <Order employee={employee} />
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
               </div>
@@ -166,13 +181,11 @@ export default function EmployeeProfilePage() {
         {/* Profile content */}
         <div className="container max-w-6xl mx-auto py-8 px-4">
           <Tabs defaultValue="about" className="w-full">
-            <TabsList className="w-full max-w-md grid grid-cols-4 mb-8">
+            <TabsList className="w-full max-w-md flex  mb-8">
               <TabsTrigger value="about" className="cursor-pointer">
                 Тухай
               </TabsTrigger>
-              <TabsTrigger value="services" className="cursor-pointer">
-                Үйлчилгээ
-              </TabsTrigger>
+
               <TabsTrigger value="experience" className="cursor-pointer">
                 Туршлага
               </TabsTrigger>
@@ -182,11 +195,45 @@ export default function EmployeeProfilePage() {
             </TabsList>
 
             <TabsContent value="about" className="space-y-8">
-              <div className="bg-white rounded-lg border shadow-sm p-6">
-                <h2 className="text-xl font-bold mb-4">Миний тухай</h2>
-                <p className="text-gray-700 whitespace-pre-line">
-                  {employee?.about}
-                </p>
+              <div className="flex flex-col gap-5">
+                <div className="bg-white rounded-lg border shadow-sm p-6">
+                  <h2 className="text-xl font-bold mb-4">Миний тухай</h2>
+                  <p className="text-gray-700 whitespace-pre-line">
+                    {employee?.about}
+                  </p>
+                </div>
+                <div className="bg-white rounded-lg border shadow-sm p-6">
+                  <h2 className="text-xl font-bold mb-4">Үйлчилгээнүүд</h2>
+                  <div className="flex flex-col gap-3">
+                    {employee.products && employee.products.length > 0 ? (
+                      employee.products.map((product: productsType) => (
+                        <div
+                          key={product._id}
+                          className="bg-white rounded-lg border shadow-sm p-6"
+                        >
+                          <h2 className="text-xl font-bold mb-2">
+                            {product.name}
+                          </h2>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div className="flex items-center">
+                              <span className="font-medium mr-2">Үнэ:</span>
+                              <span className="font-bold">
+                                {product.price}₮
+                              </span>
+                            </div>
+                          </div>
+
+                          <Button className="mt-4">Захиалах</Button>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center text-gray-500 p-6 border border-dashed rounded-lg">
+                        Одоогоор ямар нэгэн бүтээгдэхүүн бүртгэгдээгүй байна.
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </TabsContent>
           </Tabs>

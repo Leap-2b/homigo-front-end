@@ -48,21 +48,25 @@ export default function Header() {
             </div>
           </Link>
 
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                variant="outline"
-                className="text-sm font-semibold rounded-xl border-gray-300 hover:bg-gray-100 transition-all flex items-center gap-2"
-              >
-                Манай үйлчилгээ
-                <ChevronDown className="w-4 h-4 text-gray-500" />
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogTitle></DialogTitle>
-              <EmployeService />
-            </DialogContent>
-          </Dialog>
+          {currentEmploye ? (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="text-sm font-semibold rounded-xl border-gray-300 hover:bg-gray-100 transition-all flex items-center gap-2 cursor-pointer"
+                >
+                  үйлчилгээ
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogTitle></DialogTitle>
+                <EmployeService />
+              </DialogContent>
+            </Dialog>
+          ) : (
+            ""
+          )}
           {currentUser || currentEmploye ? (
             <Popover>
               <PopoverTrigger>

@@ -10,24 +10,33 @@ export async function POST(req: Request): Promise<Response> {
     const { phone, password } = await req.json();
 
     const user = await UserModel.findOne({ phone }).select("+password");
-    console.log(phone, password);
+
     if (!user) {
       return new NextResponse(
-        JSON.stringify({ error: `${phone} дугаартай хэрэглэгч байхгүй байна` })
+        JSON.stringify({ error: `${phone} дугаартай хэрэглэгч байхгүй байна` }),
+        { status: 404 }
       );
     }
+
     const isPasswordCorrect = comparePassword(password, user.password);
 
     if (!isPasswordCorrect) {
-      return new NextResponse(JSON.stringify({ error: `Нууц үг буруу байна` }));
+      return new NextResponse(
+        JSON.stringify({ error: `Нууц үг буруу байна` }),
+        { status: 401 }
+      );
     }
+
+    // Нууц үг зөв бол
     return new NextResponse(
-      JSON.stringify({ message: "Амжилттай нэвтэрлээ", user })
+      JSON.stringify({ message: "Амжилттай нэвтэрлээ", user }),
+      { status: 200 }
     );
   } catch (error) {
+    console.log(error);
     return new NextResponse(
       JSON.stringify({ error: "Нэвтрэхэд алдаа гарлаа" }),
-      { status: 500 }
+      { status: 500 } // ← системийн алдаа
     );
   }
 }

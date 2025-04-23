@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { SocialLoginButtons } from "./SocialLoginButtons";
+import { employeType } from "@/types/user";
 
 const additionalInfoSchema = z.object({
   registerNumber: z.string().regex(/^[А-ЯӨҮ]{2}\d{8}$/, {
@@ -31,10 +32,10 @@ const additionalInfoSchema = z.object({
     .optional(),
   experience: z
     .string()
-    .min(10, "Туршлага 10-аас олон тэмдэгттэй байх ёстой")
+    .min(2, "Туршлага 2-аас олон тэмдэгттэй байх ёстой")
     .max(1000, "Туршлага 1000-аас бага тэмдэгттэй байх ёстой")
     .optional(),
-  seconPhone: z.string().min(8, {
+  secondPhone: z.string().min(8, {
     message: "Утасны дугаар хамгийн багадаа 8 оронтой байх ёстой",
   }),
 });
@@ -44,21 +45,21 @@ type AdditionalInfoValues = z.infer<typeof additionalInfoSchema>;
 interface AdditionalInfoFormProps {
   onSubmit: (values: AdditionalInfoValues) => void;
   defaultValues?: Partial<AdditionalInfoValues>;
+  currentEmploye: employeType;
 }
 
 export const AdditionalInfoForm = ({
   onSubmit,
-  defaultValues,
+  currentEmploye,
 }: AdditionalInfoFormProps) => {
   const form = useForm<AdditionalInfoValues>({
     resolver: zodResolver(additionalInfoSchema),
     defaultValues: {
-      registerNumber: "",
-      phoneNumber: "",
-      address: "",
-      experience: "",
-      seconPhone: "",
-      ...defaultValues,
+      registerNumber: currentEmploye ? currentEmploye.register : "",
+      phoneNumber: currentEmploye ? String(currentEmploye.phone) : "",
+      address: currentEmploye ? currentEmploye.address : "",
+      experience: currentEmploye ? currentEmploye.experience : "",
+      secondPhone: currentEmploye ? String(currentEmploye.secondPhone) : "",
     },
   });
 
@@ -91,7 +92,7 @@ export const AdditionalInfoForm = ({
                   <FormItem className="flex-1">
                     <FormLabel>Утасны дугаар</FormLabel>
                     <FormControl>
-                      <Input placeholder="88889999" {...field} />
+                      <Input placeholder="дугаар оруулна уу" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -137,12 +138,12 @@ export const AdditionalInfoForm = ({
 
             <FormField
               control={form.control}
-              name="seconPhone"
+              name="secondPhone"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Гэр бүлийн нэг хүний дугаар</FormLabel>
                   <FormControl>
-                    <Input placeholder="99119911" {...field} />
+                    <Input placeholder="дугаар оруулна уу" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

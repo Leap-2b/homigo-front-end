@@ -7,11 +7,12 @@ import { Building2, Home, MapPin, Shield, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { signIn } from "@/lib/Employee-auth-utils.ts/Employee-login-utils";
-import { ClientsignIn } from "@/lib/Client-auth-util.ts/Client-login-utils";
+
 import { useRouter } from "next/navigation";
 import { useUser } from "@/app/_context/UserContext";
 import { useEmployee } from "@/app/_context/EmployeContext";
+import { ClientsignIn } from "@/lib/Client-auth/client-login-utils";
+import { signIn } from "@/lib/Employee-auth/employee-login-utils";
 
 export default function EnhancedLoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -26,6 +27,7 @@ export default function EnhancedLoginPage() {
     setLoading(true);
     try {
       const employe = await signIn(Number(phoneNumber), password);
+      console.log(employe);
       setCurrentEmploye(employe);
       router.push("/");
     } catch (error) {
@@ -40,6 +42,7 @@ export default function EnhancedLoginPage() {
     try {
       const user = await ClientsignIn(Number(phoneNumber), password);
       setCurrentUser(user);
+
       router.push("/");
     } catch (error) {
       console.log("Хэрэглэгч нэвтрэх үед алдаа гарлаа", error);
