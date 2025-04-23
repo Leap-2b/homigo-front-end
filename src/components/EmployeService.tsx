@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEmployee } from "@/app/_context/EmployeContext";
 
-export default function ItService() {
+export default function EmployeService() {
   const { employees } = useEmployee();
   const { currentEmploye } = useEmployee();
 
