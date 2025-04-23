@@ -19,8 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import CleanerService from "./CleanerService";
-import ItService from "./ItService";
+import EmployeService from "./EmployeService";
 
 export default function Header() {
   const { currentUser, setCurrentUser } = useUser();
@@ -52,11 +51,7 @@ export default function Header() {
             <DialogTrigger>Үйлчилгээ</DialogTrigger>
             <DialogContent>
               <DialogTitle></DialogTitle>
-              {currentEmploye?.category == "CLEANER" ? (
-                <CleanerService />
-              ) : (
-                <ItService />
-              )}
+              <EmployeService />
             </DialogContent>
           </Dialog>
           {currentUser || currentEmploye ? (
