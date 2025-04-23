@@ -60,7 +60,7 @@ export const PersonalInfoForm = ({ onSubmit }: PersonalInfoFormProps) => {
         <h2 className="text-2xl font-bold mb-6">Хувийн мэдээлэл</h2>
 
         <ProfilePictureUpload />
-        <p className="text-center mb-6 text-gray-500">Зураг нэмэх</p>
+        <p className="text-center mb-6 text-gray-500">Зураг soli</p>
 
         <div className="space-y-4">
           <div className="flex gap-4">
