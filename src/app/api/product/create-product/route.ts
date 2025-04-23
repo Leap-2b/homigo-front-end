@@ -25,6 +25,7 @@ export async function POST(req: Request): Promise<Response> {
       JSON.stringify({ message: "амжилттай нэмлээ", employee })
     );
   } catch (error) {
+    console.log(error);
     return new NextResponse(JSON.stringify({ error: "алдаа гарлаа" }), {
       status: 500,
     });

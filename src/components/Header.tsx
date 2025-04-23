@@ -13,6 +13,14 @@ import {
 import { LogOut, UserPen } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEmployee } from "@/app/_context/EmployeContext";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import CleanerService from "./CleanerService";
+import ItService from "./ItService";
 
 export default function Header() {
   const { currentUser, setCurrentUser } = useUser();
@@ -40,6 +48,17 @@ export default function Header() {
             </div>
           </Link>
 
+          <Dialog>
+            <DialogTrigger>Үйлчилгээ</DialogTrigger>
+            <DialogContent>
+              <DialogTitle></DialogTitle>
+              {currentEmploye?.category == "CLEANER" ? (
+                <CleanerService />
+              ) : (
+                <ItService />
+              )}
+            </DialogContent>
+          </Dialog>
           {currentUser || currentEmploye ? (
             <Popover>
               <PopoverTrigger>
