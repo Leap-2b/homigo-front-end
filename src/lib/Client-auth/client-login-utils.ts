@@ -7,22 +7,21 @@ export const ClientsignIn = async (phone: number, password: string) => {
       phone,
       password,
     });
-    const data = response.data.user;
-    toast.success("Амжилттай нэвтэрлээ!");
-    console.log("ajillaa", data);
-    localStorage.setItem("user", JSON.stringify(data));
+    console.log("API response:", response.data); //
+    const data = response.data;
+
+    localStorage.setItem("user", JSON.stringify(data.user));
     return data;
   } catch (error: unknown) {
-    const axiosError = error as AxiosError;
+    const axiosError = error as AxiosError<{ error?: string }>;
 
     if (axiosError.response) {
-      const data = axiosError.response.data as { message?: string };
-      toast.error(data.message || "Нууц үг эсвэл утасны дугаар буруу.");
+      const errorMessage = axiosError.response.data?.error || "Алдаа гарлаа";
+      toast.error(errorMessage);
     } else {
       toast.error("Сервертэй холбогдож чадсангүй.");
     }
 
-    console.error("Axios error:", axiosError);
     throw new Error("Алдаа гарлаа");
   }
 };

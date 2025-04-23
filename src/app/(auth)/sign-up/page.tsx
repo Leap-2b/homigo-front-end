@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import EmployeFirstStep from "./_components/EmployeFirstStep";
-import EmployeSecondStep from "./_components/EmployeSecondStep";
-import ClientFirstStep from "./_components/ClientFirstStep";
-import ClientSecondStep from "./_components/ClientSecondStep";
+import EmployeFirstStep from "./_components/employee/EmployeFirstStep";
+import EmployeSecondStep from "./_components/employee/EmployeSecondStep";
+import ClientFirstStep from "./_components/client/ClientFirstStep";
+import ClientSecondStep from "./_components/client/ClientSecondStep";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { userType } from "@/types/user";
 

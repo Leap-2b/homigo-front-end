@@ -47,6 +47,7 @@ export async function POST(req: Request): Promise<Response> {
       JSON.stringify({ message: "Амжилттай бүртгүүллээ", newUser })
     );
   } catch (error) {
+    console.log(error);
     return new NextResponse(
       JSON.stringify({ error: "бүртгүүлхэд алдаа гарлаа" }),
       { status: 500 }

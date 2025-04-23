@@ -13,6 +13,8 @@ import { toast, Toaster } from "sonner";
 import { useUser } from "./UserContext";
 import { employeType } from "@/types/user";
 import { fetchAllEmployees } from "@/lib/get-all-employe";
+import axios from "axios";
+
 type employeeContextType = {
   signUp: (
     phone: string,
@@ -30,6 +32,7 @@ type employeeContextType = {
   currentEmploye: employeType | null;
   setCurrentEmploye: Dispatch<employeType | null>;
   employees: employeType[] | null;
+  handleRefresh: () => void;
 };
 
 const employeeContext = createContext<employeeContextType>(
@@ -45,6 +48,11 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
     null
   );
   const [employees, setEmployees] = useState<employeType[] | null>(null);
+  const [refresh, setRefresh] = useState(false);
+
+  const handleRefresh = () => {
+    setRefresh(!refresh);
+  };
 
   const signUp = async (
     phone: string,
@@ -97,13 +105,28 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  useEffect(() => {
-    const employe = localStorage.getItem("employe");
-    if (employe) {
-      setCurrentEmploye(JSON.parse(employe));
+  const getCurrentEmployee = async () => {
+    const localEmployee = localStorage.getItem("employe");
+    if (!localEmployee) {
+      return;
     }
-    setIsReady(true);
-  }, []);
+    const employee = JSON.parse(localEmployee);
+    try {
+      const { data } = await axios.post("/api/employee/getCurrentEmployee", {
+        id: employee._id,
+      });
+      setCurrentEmploye(data.EmployWithProducts);
+      localStorage.setItem("employe", JSON.stringify(data.EmployWithProducts));
+    } catch (error) {
+      console.log("ERROR IN GET CURRENT", error);
+    } finally {
+      setIsReady(true);
+    }
+  };
+
+  useEffect(() => {
+    getCurrentEmployee();
+  }, [refresh]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -122,6 +145,7 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
         currentEmploye,
         setCurrentEmploye,
         employees,
+        handleRefresh,
       }}
     >
       <Toaster position="top-center" richColors />

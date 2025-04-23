@@ -1,15 +1,16 @@
 import { EmployeModel } from "@/app/models/employe-model";
 import { ProductModel } from "@/app/models/product-model";
 import { NextResponse } from "next/server";
+import { connectMongoDb } from "../../../../../utils/server/db";
 
 export async function POST(req: Request): Promise<Response> {
+  await connectMongoDb();
   try {
-    const { name, price, description, userId } = await req.json();
+    const { name, price, userId } = await req.json();
 
     const newProduct = await ProductModel.create({
       name,
       price,
-      description,
     });
     if (!newProduct) {
       return new NextResponse(JSON.stringify({ error: "алдаа гарлаа" }), {
