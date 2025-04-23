@@ -1,6 +1,7 @@
 import { EmployeModel } from "@/app/models/employe-model";
 import { NextResponse } from "next/server";
 import { connectMongoDb } from "../../../../../utils/server/db";
+import "@/app/models/product-model";
 export async function GET(req: Request): Promise<Response> {
   await connectMongoDb();
   try {
@@ -10,6 +11,7 @@ export async function GET(req: Request): Promise<Response> {
       { status: 200 }
     );
   } catch (error) {
+    console.log(error);
     return new NextResponse(JSON.stringify({ error: "алдаа гарлаа" }), {
       status: 500,
     });
