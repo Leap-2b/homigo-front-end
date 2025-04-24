@@ -9,7 +9,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-export const PersonalInfoFields = ({ form }: { form: UseFormReturn<any> }) => {
+export interface PersonalInfoFormValues {
+  firstName: string;
+  lastName: string;
+  register: string;
+  secondPhone: string;
+}
+
+export const PersonalInfoFields = ({
+  form,
+}: {
+  form: UseFormReturn<PersonalInfoFormValues>;
+}) => {
   return (
     <>
       <div className="flex gap-4">
