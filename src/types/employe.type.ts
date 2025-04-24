@@ -16,4 +16,5 @@ export type employeType = {
   img: string;
   category: categoryStatusEnum;
   products: ProductModelType[];
+  likedBy: string[];
 };

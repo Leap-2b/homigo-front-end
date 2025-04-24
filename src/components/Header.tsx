@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useUser } from "@/app/_context/UserContext";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
-import { ChevronDown } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import {
   Popover,
@@ -14,13 +13,6 @@ import {
 import { LogOut, UserPen } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEmployee } from "@/app/_context/EmployeContext";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import EmployeService from "./EmployeService";
 
 export default function Header() {
   const { currentUser, setCurrentUser } = useUser();
@@ -48,25 +40,6 @@ export default function Header() {
             </div>
           </Link>
 
-          {currentEmploye ? (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="text-sm font-semibold rounded-xl border-gray-300 hover:bg-gray-100 transition-all flex items-center gap-2 cursor-pointer"
-                >
-                  үйлчилгээ
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogTitle></DialogTitle>
-                <EmployeService />
-              </DialogContent>
-            </Dialog>
-          ) : (
-            ""
-          )}
           {currentUser || currentEmploye ? (
             <Popover>
               <PopoverTrigger>

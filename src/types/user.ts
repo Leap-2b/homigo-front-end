@@ -1,5 +1,5 @@
 export type userType = {
-  id?: number;
+  _id: string;
   userName?: string;
   email?: string;
   phone?: number;
@@ -22,11 +22,23 @@ export type employeType = {
   secondPhone: string;
   __v: number;
   _id: string;
+  likedBy: string[];
 };
 
 export type productsType = {
   description: string;
   name: string;
   price: number;
-  _id: number;
+  _id: string;
+};
+
+export type orderType = {
+  _id: string;
+  orderStatus: string;
+  request: string;
+  productId: productsType[];
+  userId: string;
+  employeId: string;
+  isPaid: boolean;
+  totalPrice: number;
 };

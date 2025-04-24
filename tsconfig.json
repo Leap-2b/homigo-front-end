@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     "src/app/api/employee/getAllEmployee",
     "src/app/api/product/create-product",
-    "src/lib/Employee-auth",
+    "src/lib/Employee",
     "src/lib/Client-auth"
   ],
   "exclude": ["node_modules"]

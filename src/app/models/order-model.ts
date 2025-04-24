@@ -11,8 +11,8 @@ const OrderSchema = new Schema<OrderModelType>({
   request: { type: String, required: true },
   userId: { type: Schema.Types.ObjectId, ref: "Users", required: true },
   employeId: { type: Schema.Types.ObjectId, ref: "Employe", required: true },
-  productId: { type: Schema.Types.ObjectId, ref: "Products", required: true },
-  isPaid: { type: Boolean, required: true },
+  productId: [{ type: Schema.Types.ObjectId, ref: "Product" }],
+  isPaid: { type: Boolean, required: true, default: false },
   totalPrice: { type: Number, required: true },
 });
 
