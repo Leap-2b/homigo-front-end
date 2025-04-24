@@ -24,7 +24,7 @@ import {
   Shield,
   User,
 } from "lucide-react";
-import { EmployeeSignUp } from "@/lib/Employee-auth/employee-sign-up-util";
+import { EmployeeSignUp } from "@/lib/Employee/employee-sign-up-util";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useEmployee } from "@/app/_context/EmployeContext";

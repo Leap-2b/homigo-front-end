@@ -20,6 +20,7 @@ const EmployeSchema = new Schema<employeType>({
   },
   img: { type: String, required: true },
   products: [{ type: Schema.Types.ObjectId, ref: "Product" }],
+  likedBy: [{ type: Schema.Types.ObjectId, ref: "Users" }],
 });
 
 export const EmployeModel: Model<employeType> =

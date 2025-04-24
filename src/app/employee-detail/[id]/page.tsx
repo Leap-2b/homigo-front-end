@@ -22,8 +22,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEmployee } from "@/app/_context/EmployeContext";
-import Order from "../_components/Order";
+
 import { productsType } from "@/types/user";
+import { likeEmploye } from "@/lib/Employee/likeEmploye";
+import { useUser } from "@/app/_context/UserContext";
+import { toast } from "sonner";
+import Order from "../_components/Order";
 
 export default function EmployeeProfilePage() {
   const params = useParams();
@@ -32,9 +36,9 @@ export default function EmployeeProfilePage() {
   const [isLiked, setIsLiked] = useState(false);
 
   const { employees } = useEmployee();
+  const { currentUser } = useUser();
 
   const employee = employees?.find((employee) => employee._id == id);
-  console.log(employee?.products);
 
   if (!employee) {
     return (
@@ -44,6 +48,18 @@ export default function EmployeeProfilePage() {
       </div>
     );
   }
+
+  const likeHandler = async () => {
+    try {
+      if (employee && currentUser) {
+        await likeEmploye(currentUser._id, employee._id);
+        setIsLiked(!isLiked);
+        toast.success("Амжилттай хадгалаа");
+      }
+    } catch (error) {
+      console.error("Like хийхэд алдаа:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -89,11 +105,13 @@ export default function EmployeeProfilePage() {
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => setIsLiked(!isLiked)}
+                          onClick={() => likeHandler()}
                         >
                           <Heart
                             className={`w-4 h-4 mr-2 ${
-                              isLiked ? "fill-red-500 text-red-500" : ""
+                              isLiked
+                                ? "fill-red-500 text-red-500"
+                                : "text-gray-400"
                             }`}
                           />
                           Хадгалах
@@ -168,7 +186,12 @@ export default function EmployeeProfilePage() {
                       </DialogTrigger>
                       <DialogContent>
                         <DialogTitle></DialogTitle>
-                        <Order employee={employee} />
+                        {currentUser && (
+                          <Order
+                            employee={employee}
+                            currentUser={currentUser}
+                          />
+                        )}
                       </DialogContent>
                     </Dialog>
                   </div>

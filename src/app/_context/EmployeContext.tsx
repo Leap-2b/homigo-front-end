@@ -12,7 +12,7 @@ import React, {
 import { toast, Toaster } from "sonner";
 import { useUser } from "./UserContext";
 import { employeType } from "@/types/user";
-import { fetchAllEmployees } from "@/lib/get-all-employe";
+import { fetchAllEmployees } from "@/lib/Employee/get-all-employe";
 import axios from "axios";
 
 type employeeContextType = {
