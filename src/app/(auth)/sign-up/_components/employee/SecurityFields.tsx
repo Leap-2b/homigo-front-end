@@ -9,7 +9,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-export const SecurityFields = ({ form }: { form: UseFormReturn<any> }) => {
+export interface SecurityFormValues {
+  password: string;
+  confirmPassword: string;
+}
+
+export const SecurityFields = ({
+  form,
+}: {
+  form: UseFormReturn<SecurityFormValues>;
+}) => {
   return (
     <div className="flex gap-4">
       <FormField

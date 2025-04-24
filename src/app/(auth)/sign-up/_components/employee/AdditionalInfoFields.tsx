@@ -1,4 +1,3 @@
-// components/employee/AdditionalInfoFields.tsx
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import {
@@ -9,17 +8,37 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
+import { z } from "zod";
 
-export const AdditionalInfoFields = ({
+const formSchema = z.object({
+  about: z.string().min(3, {
+    message: "Хаяг хамгийн багадаа 3 тэмдэгт байх ёстой.",
+  }),
+  address: z.string().min(3, {
+    message: "Хаяг хамгийн багадаа 3 тэмдэгт байх ёстой.",
+  }),
+  experience: z.string().min(1, {
+    message: "Туршлага хамгийн багадаа 1 тэмдэгт байх ёстой.",
+  }),
+  category: z.string().min(2, {
+    message: "Ажлын төрөл хамгийн багадаа 2 тэмдэгт байх ёстой.",
+  }),
+});
+
+export type AdditionalInfoFormValues = z.infer<typeof formSchema>;
+
+interface AdditionalInfoFieldsProps {
+  form: UseFormReturn<AdditionalInfoFormValues>;
+  setAddress: React.Dispatch<React.SetStateAction<string>>;
+  setExperience: React.Dispatch<React.SetStateAction<string>>;
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const AdditionalInfoFields: React.FC<AdditionalInfoFieldsProps> = ({
   form,
   setAddress,
   setExperience,
   setCategory,
-}: {
-  form: UseFormReturn<any>;
-  setAddress: React.Dispatch<React.SetStateAction<string>>;
-  setExperience: React.Dispatch<React.SetStateAction<string>>;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   return (
     <>
