@@ -11,18 +11,43 @@ import { PersonalInfoForm } from "./PersonalInfoForm";
 import { changePassword } from "@/lib/profile/change-password-util";
 import { useEmployee } from "@/app/_context/EmployeContext";
 import { changeAdditionallinfo } from "@/lib/profile/change-additionalI-info";
+import { employeType } from "@/types/user";
+
+// Личныйн формын утгийн интерфейс
+interface PersonalFormValues {
+  surname: string;
+  name: string;
+  email: string;
+  about?: string;
+}
+
+// Нууц үгийн формын утгийн интерфейс
+interface PasswordFormValues {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+// Нэмэлт мэдээллийн формын утгийн интерфейс
+interface AdditionalFormValues {
+  registerNumber: string;
+  phoneNumber: number;
+  secondPhone: number;
+  address: string;
+  experience: string;
+}
 
 export default function EmployeProfile() {
   const [activeTab, setActiveTab] = useState("personal");
   const { currentEmploye } = useEmployee();
   const [loading, setLoading] = useState(false);
 
-  const onPersonalSubmit = (values: any) => {
+  const onPersonalSubmit = (values: PersonalFormValues) => {
     console.log("Personal form submitted:", values);
     toast.success("Хувийн мэдээлэл амжилттай хадгалагдлаа");
   };
 
-  const onPasswordSubmit = (values: any) => {
+  const onPasswordSubmit = (values: PasswordFormValues) => {
     setLoading(true);
     if (currentEmploye) {
       changePassword(currentEmploye?._id, values.newPassword);
@@ -31,7 +56,7 @@ export default function EmployeProfile() {
     setLoading(false);
   };
 
-  const onAdditionalSubmit = (values: any) => {
+  const onAdditionalSubmit = (values: AdditionalFormValues) => {
     if (currentEmploye) {
       console.log(
         currentEmploye?._id,
@@ -87,6 +112,9 @@ export default function EmployeProfile() {
                 defaultValues={{
                   about:
                     "Би шинэ зүйлс судлах, аялах дуртай. Мөн хөгжим тоглох миний хобби юм.",
+                  surname: currentEmploye?.lastName || "",
+                  name: currentEmploye?.firstName || "",
+                  email: currentEmploye?.email || "",
                 }}
               />
             </TabsContent>
@@ -96,7 +124,10 @@ export default function EmployeProfile() {
             </TabsContent>
 
             <TabsContent value="payment">
-              <AdditionalInfoForm onSubmit={onAdditionalSubmit} currentEmploye={currentEmploye} />
+              <AdditionalInfoForm
+                onSubmit={onAdditionalSubmit}
+                currentEmploye={currentEmploye}
+              />
             </TabsContent>
           </CardContent>
         </Card>
