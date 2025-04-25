@@ -51,6 +51,7 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
   const [refresh, setRefresh] = useState(false);
 
   const handleRefresh = () => {
+    console.log("it is working refresh!!!!~");
     setRefresh(!refresh);
   };
 
@@ -128,15 +129,26 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
     getCurrentEmployee();
   }, [refresh]);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data: employeType[] | undefined = await fetchAllEmployees();
+  //     if (data) {
+  //       setEmployees(data);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const data: employeType[] | undefined = await fetchAllEmployees();
       if (data) {
+        console.log("fetching employees", data);
         setEmployees(data);
       }
     };
     fetchData();
-  }, []);
+  }, [refresh]);
 
   return (
     <employeeContext.Provider
