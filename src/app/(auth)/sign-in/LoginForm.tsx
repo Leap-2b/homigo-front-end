@@ -45,7 +45,7 @@ export default function LoginForm({
   }, [phoneNumber, password]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-md mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center space-y-2">
         <h1 className="text-2xl font-bold">{title}</h1>
         <p className="text-gray-500 text-sm">{description}</p>
@@ -62,7 +62,7 @@ export default function LoginForm({
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
             placeholder="Утасны дугаараа оруулна уу"
-            className="bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500"
+            className="bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500 w-full"
           />
         </div>
 
@@ -76,7 +76,7 @@ export default function LoginForm({
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
-            className="bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500"
+            className="bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500 w-full"
           />
         </div>
 

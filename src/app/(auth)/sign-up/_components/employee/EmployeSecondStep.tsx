@@ -31,12 +31,9 @@ import Image from "next/image";
 import { useEmployee } from "@/app/_context/EmployeContext";
 import { uploadImage } from "@/lib/handle-upload";
 
-
-import React, { Dispatch } from "react";
 import EmployeeRegistrationForm from "./EmployeeRegistrationForm";
 import { RegistrationFooter } from "./RegistrationFooter";
 import { BackgroundElements } from "./BackgroundElements";
-
 
 const EmployeSecondStep = ({
   setCurrentStep,
