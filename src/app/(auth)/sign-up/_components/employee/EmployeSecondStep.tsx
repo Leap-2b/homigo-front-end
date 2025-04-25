@@ -4,7 +4,6 @@ import { RegistrationFooter } from "./RegistrationFooter";
 import { BackgroundElements } from "./BackgroundElements";
 import { Dispatch } from "react";
 
-
 const EmployeSecondStep = ({
   setCurrentStep,
   currentStep,
