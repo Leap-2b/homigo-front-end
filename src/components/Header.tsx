@@ -15,7 +15,6 @@ import { LogOut, UserPen } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEmployee } from "@/app/_context/EmployeContext";
 
-
 export default function Header() {
   const { currentUser, setCurrentUser } = useUser();
   const { currentEmploye, setCurrentEmploye } = useEmployee();
