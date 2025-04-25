@@ -133,11 +133,12 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
     const fetchData = async () => {
       const data: employeType[] | undefined = await fetchAllEmployees();
       if (data) {
+        console.log("fetching employees", data);
         setEmployees(data);
       }
     };
     fetchData();
-  }, []);
+  }, [refresh]);
 
   return (
     <employeeContext.Provider

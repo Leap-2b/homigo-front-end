@@ -4,7 +4,6 @@ import LoginTabs from "./LoginTabs";
 import TrustIndicators from "./TrustIndicators";
 import BackgroundElements from "./BackgroundElements";
 
-
 export default function EnhancedLoginPage() {
   return (
     <div className="min-h-[82vh] bg-gradient-to-b mt-30 from-white to-gray-50">

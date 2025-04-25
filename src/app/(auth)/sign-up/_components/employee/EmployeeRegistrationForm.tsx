@@ -36,7 +36,7 @@ const EmployeeRegistrationForm = ({
   const [imageFile, setImageFile] = React.useState<File | null>(null);
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
-  const { setCurrentEmploye } = useEmployee();
+  const { setCurrentEmploye, handleRefresh } = useEmployee();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -94,6 +94,7 @@ const EmployeeRegistrationForm = ({
     } catch (error) {
       console.log(error);
     }
+    handleRefresh();
     setLoading(false);
   }
 
