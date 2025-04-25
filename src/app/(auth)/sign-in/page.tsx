@@ -1,18 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-
-import { Building2, Home, MapPin, Shield, User } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-import { useRouter } from "next/navigation";
-import { useUser } from "@/app/_context/UserContext";
-import { useEmployee } from "@/app/_context/EmployeContext";
-import { ClientsignIn } from "@/lib/Client-auth/client-login-utils";
-import { signIn } from "@/lib/Employee/employee-login-utils";
-
 import LoginTabs from "./LoginTabs";
 import TrustIndicators from "./TrustIndicators";
 import BackgroundElements from "./BackgroundElements";

@@ -28,6 +28,7 @@ type employeeContextType = {
     experience: string,
     category: string,
     products: string
+
   ) => void;
   currentEmploye: employeType | null;
   setCurrentEmploye: Dispatch<employeType | null>;

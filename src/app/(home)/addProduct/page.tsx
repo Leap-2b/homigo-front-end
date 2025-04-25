@@ -8,7 +8,6 @@ import { useState } from "react";
 import { addService } from "@/lib/service/add-service";
 import { toast } from "sonner";
 import { deleteService } from "@/lib/service/delete-service";
-
 export default function EmployeService() {
   const { handleRefresh, currentEmploye } = useEmployee();
 
@@ -25,7 +24,7 @@ export default function EmployeService() {
       try {
         await addService(currentEmploye._id, name, price);
         setName("");
-        setPrice(0); 
+        setPrice(0);
         handleRefresh();
       } catch (error) {
         console.error("Нэмэх үед алдаа:", error);
@@ -68,7 +67,7 @@ export default function EmployeService() {
               <div className="flex items-center bg-gray-50 rounded-md border overflow-hidden">
                 <Input
                   type="number"
-                  value={product?.price} 
+                  value={product?.price}
                   className="w-28 border-0 focus-visible:ring-0 text-right"
                   placeholder="Үнэ"
                   readOnly
@@ -95,13 +94,13 @@ export default function EmployeService() {
             placeholder="үйлчилгээний нэр"
             className="flex-1"
             value={name}
-            onChange={(e) => setName(e.target.value)} 
+            onChange={(e) => setName(e.target.value)}
           />
           <Input
             type="number"
             placeholder="үйлчилгээний үнэ"
             className="flex-1"
-            value={price} 
+            value={price}
             onChange={(e) => setPrice(Number(e.target.value))}
           />
           <Button size="sm" onClick={addHandler}>
