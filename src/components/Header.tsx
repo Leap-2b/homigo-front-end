@@ -13,7 +13,6 @@ import {
 import { LogOut, UserPen } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEmployee } from "@/app/_context/EmployeContext";
-import Order from "@/app/employee-detail/_components/Order";
 
 export default function Header() {
   const { currentUser, setCurrentUser } = useUser();
@@ -35,20 +34,20 @@ export default function Header() {
           <Link href="/" className="flex items-center">
             <div className="relative flex items-center">
               <Image src="/logo.png" alt="logo" width={50} height={44} />
-              <span className="text-[#222] font-bold text-xl ml-3">
+              <span className="text-[#222] font-bold text-xl ml-3 hidden md:block">
                 Homi-Go
               </span>
             </div>
           </Link>
 
-          <div className="flex items-center gap-10">
+          <div className="flex items-center md:gap-10 gap-3">
             <Link href="/order">
-              <p className="flex items-center gap-2 text-black hover:text-green-500 font-semibold border-b-2 border-transparent hover:border-green-500 transition-all duration-200 px-3 py-2">
+              <p className="flex items-center gap-2 text-black hover:text-green-500 font-semibold border-b-2 border-transparent hover:border-green-500 transition-all duration-200 px-3 py-2 text-sm md:text-lg">
                 <span className="text-lg">📋</span>Захиалга
               </p>
             </Link>
             <Link href="/addProduct">
-              <p className="flex items-center gap-2 text-black hover:text-green-500 font-semibold border-b-2 border-transparent hover:border-green-500 transition-all duration-200 px-3 py-2">
+              <p className="flex items-center gap-2 text-black hover:text-green-500 font-semibold border-b-2 border-transparent hover:border-green-500 transition-all duration-200 px-3 py-2 text-sm md:text-lg">
                 <span className="text-lg">+</span>Үйлчилгээ нэмэх
               </p>
             </Link>
