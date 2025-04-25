@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React from "react";
-import { UseFormReturn } from "react-hook-form";
 import {
   FormField,
   FormItem,
@@ -17,7 +18,7 @@ export interface SecurityFormValues {
 export const SecurityFields = ({
   form,
 }: {
-  form: UseFormReturn<SecurityFormValues>;
+  form: any
 }) => {
   return (
     <div className="flex gap-4">

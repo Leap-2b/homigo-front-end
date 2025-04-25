@@ -27,6 +27,7 @@ import {
 import Image from "next/image";
 import { userType } from "@/types/user";
 
+
 const EmployeFirstStep = ({
   setCurrentStep,
   currentStep,
@@ -60,7 +61,6 @@ const EmployeFirstStep = ({
     });
     setCurrentStep(currentStep + 1);
   }
-
   return (
     <div className="">
       {/* Background animation */}

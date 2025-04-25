@@ -1,6 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-
 import LoginTabs from "./LoginTabs";
 import TrustIndicators from "./TrustIndicators";
 import BackgroundElements from "./BackgroundElements";

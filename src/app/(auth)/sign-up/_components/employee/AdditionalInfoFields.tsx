@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React from "react";
-import { UseFormReturn } from "react-hook-form";
 import {
   FormField,
   FormItem,
@@ -8,33 +9,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { z } from "zod";
 
-const formSchema = z.object({
-  about: z.string().min(3, {
-    message: "Хаяг хамгийн багадаа 3 тэмдэгт байх ёстой.",
-  }),
-  address: z.string().min(3, {
-    message: "Хаяг хамгийн багадаа 3 тэмдэгт байх ёстой.",
-  }),
-  experience: z.string().min(1, {
-    message: "Туршлага хамгийн багадаа 1 тэмдэгт байх ёстой.",
-  }),
-  category: z.string().min(2, {
-    message: "Ажлын төрөл хамгийн багадаа 2 тэмдэгт байх ёстой.",
-  }),
-});
-
-export type AdditionalInfoFormValues = z.infer<typeof formSchema>;
-
-interface AdditionalInfoFieldsProps {
-  form: UseFormReturn<AdditionalInfoFormValues>;
-  setAddress: React.Dispatch<React.SetStateAction<string>>;
-  setExperience: React.Dispatch<React.SetStateAction<string>>;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
+export type AdditionalInfoFormValues = {
+  address: string;
+  experience: string;
+  about: string;
+  category: string;
 }
 
-export const AdditionalInfoFields: React.FC<AdditionalInfoFieldsProps> = ({
+
+
+export const AdditionalInfoFields: React.FC<any> = ({
   form,
   setAddress,
   setExperience,

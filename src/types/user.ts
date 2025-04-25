@@ -1,10 +1,11 @@
 export type userType = {
-  _id: string;
   userName?: string;
   email?: string;
   phone?: number;
   password?: string;
   role?: string;
+  _id?: string;
+  currentUser?: string;
 };
 export type employeType = {
   about: string;
@@ -17,7 +18,7 @@ export type employeType = {
   lastName: string;
   password: string;
   phone: number;
-  products: productsType;
+  products: productsType[];
   register: string;
   secondPhone: string;
   __v: number;

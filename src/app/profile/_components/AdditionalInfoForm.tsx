@@ -28,13 +28,11 @@ const additionalInfoSchema = z.object({
   address: z
     .string()
     .min(5, "Хаяг 5-аас олон тэмдэгттэй байх ёстой")
-    .max(200, "Хаяг 200-аас бага тэмдэгттэй байх ёстой")
-    .optional(),
+    .max(200, "Хаяг 200-аас бага тэмдэгттэй байх ёстой"),
   experience: z
     .string()
     .min(2, "Туршлага 2-аас олон тэмдэгттэй байх ёстой")
-    .max(1000, "Туршлага 1000-аас бага тэмдэгттэй байх ёстой")
-    .optional(),
+    .max(1000, "Туршлага 1000-аас бага тэмдэгттэй байх ёстой"),
   secondPhone: z.string().min(8, {
     message: "Утасны дугаар хамгийн багадаа 8 оронтой байх ёстой",
   }),
@@ -45,7 +43,7 @@ type AdditionalInfoValues = z.infer<typeof additionalInfoSchema>;
 interface AdditionalInfoFormProps {
   onSubmit: (values: AdditionalInfoValues) => void;
   defaultValues?: Partial<AdditionalInfoValues>;
-  currentEmploye: employeType;
+  currentEmploye: employeType | null;
 }
 
 export const AdditionalInfoForm = ({

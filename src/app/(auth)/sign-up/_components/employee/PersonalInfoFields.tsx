@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React from "react";
-import { UseFormReturn } from "react-hook-form";
 import {
   FormField,
   FormItem,
@@ -19,7 +20,7 @@ export interface PersonalInfoFormValues {
 export const PersonalInfoFields = ({
   form,
 }: {
-  form: UseFormReturn<PersonalInfoFormValues>;
+  form: any
 }) => {
   return (
     <>

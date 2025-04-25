@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { EmployeeSignUp } from "@/lib/Employee-auth/employee-sign-up-util";
+
 import { useEmployee } from "@/app/_context/EmployeContext";
 import { uploadImage } from "@/lib/handle-upload";
 import { ImageUploader } from "./ImageUploader";
@@ -16,6 +16,7 @@ import { PersonalInfoFields } from "./PersonalInfoFields";
 import { SecurityFields } from "./SecurityFields";
 import { AdditionalInfoFields } from "./AdditionalInfoFields";
 import { formSchema } from "./vaidationSchema";
+import { EmployeeSignUp } from "@/lib/Employee/employee-sign-up-util";
 
 const EmployeeRegistrationForm = ({
   setCurrentStep,
