@@ -5,4 +5,5 @@ export type ProductModelType = {
   name: string;
   price: number;
   description: string;
+  products: ProductModelType[];
 };

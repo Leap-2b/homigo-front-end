@@ -40,6 +40,7 @@ export const PasswordForm = ({ onSubmit, loading }: PasswordFormProps) => {
     defaultValues: {
       newPassword: "",
       confirmPassword: "",
+
     },
   });
 

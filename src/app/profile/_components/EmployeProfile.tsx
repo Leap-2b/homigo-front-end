@@ -11,19 +11,18 @@ import { PersonalInfoForm } from "./PersonalInfoForm";
 import { changePassword } from "@/lib/profile/change-password-util";
 import { useEmployee } from "@/app/_context/EmployeContext";
 import { changeAdditionallinfo } from "@/lib/profile/change-additionalI-info";
-import { employeType } from "@/types/user";
+
 
 // Личныйн формын утгийн интерфейс
 interface PersonalFormValues {
   surname: string;
   name: string;
   email: string;
-  about?: string;
+  about: string;
 }
 
 // Нууц үгийн формын утгийн интерфейс
 interface PasswordFormValues {
-  currentPassword: string;
   newPassword: string;
   confirmPassword: string;
 }
@@ -31,8 +30,8 @@ interface PasswordFormValues {
 // Нэмэлт мэдээллийн формын утгийн интерфейс
 interface AdditionalFormValues {
   registerNumber: string;
-  phoneNumber: number;
-  secondPhone: number;
+  phoneNumber: string;
+  secondPhone: string;
   address: string;
   experience: string;
 }
@@ -69,10 +68,10 @@ export default function EmployeProfile() {
       changeAdditionallinfo(
         currentEmploye?._id,
         values.registerNumber,
-        values.phoneNumber,
+        Number(values.phoneNumber),
         values.address,
         values.experience,
-        values.secondPhone
+        Number(values.secondPhone)
       );
     }
     toast("Бусад мэдээлэл амжилттай хадгалагдлаа");
