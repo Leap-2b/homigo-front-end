@@ -17,7 +17,7 @@ export const changeAdditionallinfo = async (
       experience,
       secondPhone,
     });
-    console.log(response);
+
     return response.data;
   } catch (error: unknown) {
     console.error("Бусад мэдээлэл солих үед алдаа гарлаа:", error);

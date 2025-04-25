@@ -31,6 +31,7 @@ const Order = ({
   const orderHandler = () => {
     try {
       createOrder(
+        currentUser.email,
         information,
         currentUser._id,
         productIds,

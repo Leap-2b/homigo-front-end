@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const createOrder = async (
+  email: string,
   request: string,
   userId: string,
   productId: string[],
@@ -9,13 +10,13 @@ export const createOrder = async (
 ) => {
   try {
     const response = await axios.post("/api/order/create-order", {
+      email,
       request,
       userId,
       productId,
       employeId,
       totalPrice,
     });
-    console.log("response", response);
     return response.data;
   } catch (error) {
     console.error("захиалга үүсгэхэд алдаа гарлаа", error);

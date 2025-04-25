@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { OrderModel } from "@/app/models/order-model";
 import { connectMongoDb } from "../../../../../utils/server/db";
+import { sendEmail } from "../../../../../utils/send-email";
 
 export async function PUT(req: Request): Promise<Response> {
   try {
@@ -16,11 +17,11 @@ export async function PUT(req: Request): Promise<Response> {
 
     await connectMongoDb();
 
-    const updatedOrder = await OrderModel.findByIdAndUpdate(
+    const updatedOrder: any = await OrderModel.findByIdAndUpdate(
       id,
       { orderStatus: status },
       { new: true }
-    );
+    ).populate("userId");
 
     if (!updatedOrder) {
       return NextResponse.json(
@@ -28,7 +29,12 @@ export async function PUT(req: Request): Promise<Response> {
         { status: 404 }
       );
     }
-
+    const email = updatedOrder.userId.email;
+    await sendEmail({
+      email,
+      content: `<h1>Таны захиалгийн хариу ирлээ</h1><p>${status}</p>`,
+      tittle: "Таны захиалгийн хариу ирлээ",
+    });
     return NextResponse.json({
       message: "Төлөв амжилттай шинэчлэгдлээ",
       updatedOrder,
