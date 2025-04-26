@@ -1,37 +1,29 @@
 "use client"
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const NavBar = () => {
   const [currentImage, setCurrentImage] = useState('/zurag.png');
-  const timerRef = useRef(null);
-
-  const startSlideTimer = () => {
-    clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
+  
+  useEffect(() => {
+    const timer = setInterval(() => {
       setCurrentImage(prev => 
         prev === '/zurag.png' ? '/zurag2.png' : '/zurag.png'
       );
     }, 5000);
-  };
-  
-  useEffect(() => {
-    startSlideTimer();
     
-    return () => clearInterval(timerRef.current);
+    return () => clearInterval(timer);
   }, []);
 
   const nextSlide = () => {
     setCurrentImage(prev => prev === '/zurag.png' ? '/zurag2.png' : '/zurag.png');
-    startSlideTimer(); // Reset timer when manually changing slides
   };
 
   const prevSlide = () => {
     setCurrentImage(prev => prev === '/zurag.png' ? '/zurag2.png' : '/zurag.png');
-    startSlideTimer(); // Reset timer when manually changing slides
   };
 
   return (
@@ -79,29 +71,6 @@ const NavBar = () => {
       >
         <ChevronRight size={24} />
       </button>
-      
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-30">
-        <button
-          onClick={() => {
-            setCurrentImage('/zurag.png');
-            startSlideTimer();
-          }}
-          className={`w-3 h-3 rounded-full ${
-            currentImage === '/zurag.png' ? "bg-white" : "bg-white/50"
-          }`}
-          aria-label="First slide"
-        />
-        <button
-          onClick={() => {
-            setCurrentImage('/zurag2.png');
-            startSlideTimer();
-          }}
-          className={`w-3 h-3 rounded-full ${
-            currentImage === '/zurag2.png' ? "bg-white" : "bg-white/50"
-          }`}
-          aria-label="Second slide"
-        />
-      </div>
     </div>
   );
 };
