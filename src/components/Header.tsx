@@ -13,6 +13,7 @@ import {
 import { LogOut, Menu, UserIcon, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+
 export default function Header() {
   // Replace context with local state
   const [currentUser, setCurrentUser] = useState(null);
@@ -49,7 +50,7 @@ export default function Header() {
           <Link href="/" className="flex items-center">
             <div className="relative flex items-center">
               <Image src="/logo.png" alt="logo" width={50} height={44} />
-              <span className="text-[#222] font-bold text-xl ml-3">
+              <span className="text-[#222] font-bold text-xl ml-3 hidden md:block">
                 Homi-Go
               </span>
             </div>
@@ -69,6 +70,7 @@ export default function Header() {
                 </p>
               </Link>
             </div>
+
 
             {currentUser || currentEmploye ? (
               <Popover>
