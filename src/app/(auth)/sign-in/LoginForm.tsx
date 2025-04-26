@@ -54,7 +54,7 @@ export default function LoginForm({
       <div className="space-y-4">
         <div className="space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
-            <User size={16} className="text-green-500" />
+            <User size={16} className="text-[#2672e4]" />
             Утасны дугаар
           </label>
           <Input
@@ -68,7 +68,7 @@ export default function LoginForm({
 
         <div className="space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
-            <Shield size={16} className="text-green-500" />
+            <Shield size={16} className="text-[#2672e4]" />
             Нууц үг
           </label>
           <Input
@@ -81,13 +81,13 @@ export default function LoginForm({
         </div>
 
         <div className="flex justify-end">
-          <a href="#" className="text-sm text-green-600 hover:text-green-700">
+          <a href="#" className="text-sm text-[#3c87f7] hover:text-[#2672e4]">
             Нууц үг Сэргээх
           </a>
         </div>
 
         <Button
-          className="w-full bg-green-500 hover:bg-green-600"
+          className="w-full bg-[#3c87f7] hover:bg-[#2672e4]"
           onClick={handleSubmit}
           disabled={loading}
         >

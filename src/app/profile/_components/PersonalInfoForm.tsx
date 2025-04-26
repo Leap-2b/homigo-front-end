@@ -130,7 +130,7 @@ export const PersonalInfoForm = ({ onSubmit }: PersonalInfoFormProps) => {
 
           <Button
             type="submit"
-            className="w-full bg-green-500 hover:bg-green-600 text-white"
+            className="w-full bg-[#3c87f7] hover:bg-[#2672e4] text-white"
           >
             Хадгалах
           </Button>

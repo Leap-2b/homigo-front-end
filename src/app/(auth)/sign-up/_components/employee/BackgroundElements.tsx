@@ -37,7 +37,7 @@ export const BackgroundElements = () => {
           delay: 1,
         }}
       >
-        <Building2 className="text-emerald-200 w-14 h-14" />
+        <Building2 className="text-[#3c87f7] w-14 h-14" />
       </motion.div>
 
       <motion.div

@@ -11,15 +11,15 @@ export const RegistrationFooter = () => {
       transition={{ delay: 0.3, duration: 0.5 }}
     >
       <div className="flex items-center gap-1">
-        <Shield size={16} className="text-green-500" />
+        <Shield size={16} className="text-[#2672e4]" />
         <span>Secure registration</span>
       </div>
       <div className="flex items-center gap-1">
-        <User size={16} className="text-green-500" />
+        <User size={16} className="text-[#2672e4]" />
         <span>Join 10,000+ users</span>
       </div>
       <div className="flex items-center gap-1">
-        <CheckCircle size={16} className="text-green-500" />
+        <CheckCircle size={16} className="text-[#2672e4]" />
         <span>Free to join</span>
       </div>
     </motion.div>
