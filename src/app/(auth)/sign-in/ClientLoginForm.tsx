@@ -9,7 +9,7 @@ export default function ClientLoginForm() {
 
   const handleClientLogin = async (phoneNumber: number, password: string) => {
     const user = await ClientsignIn(phoneNumber, password);
-    setCurrentUser(user);
+    setCurrentUser(user.user);
     router.push("/");
   };
 

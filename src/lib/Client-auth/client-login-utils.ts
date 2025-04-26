@@ -7,7 +7,7 @@ export const ClientsignIn = async (phone: number, password: string) => {
       phone,
       password,
     });
-    console.log("API response:", response.data); //
+
     const data = response.data;
 
     localStorage.setItem("user", JSON.stringify(data.user));

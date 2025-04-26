@@ -11,9 +11,10 @@ import React, {
 } from "react";
 import { toast, Toaster } from "sonner";
 import { useUser } from "./UserContext";
-import { employeType } from "@/types/user";
+import { employeType, orderType } from "@/types/user";
 import { fetchAllEmployees } from "@/lib/Employee/get-all-employe";
 import axios from "axios";
+import { getOrders } from "@/lib/order/getOrder";
 
 type employeeContextType = {
   signUp: (
@@ -28,12 +29,12 @@ type employeeContextType = {
     experience: string,
     category: string,
     products: string
-
   ) => void;
   currentEmploye: employeType | null;
   setCurrentEmploye: Dispatch<employeType | null>;
   employees: employeType[] | null;
   handleRefresh: () => void;
+  fetchOrders: () => Promise<orderType[]>;
 };
 
 const employeeContext = createContext<employeeContextType>(
@@ -125,6 +126,18 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const fetchOrders = async (): Promise<orderType[]> => {
+    if (!currentEmploye) return [];
+
+    try {
+      const data = await getOrders(currentEmploye._id);
+      return data;
+    } catch (error) {
+      console.error("Захиалгыг татаж чадсангүй:", error);
+      return [];
+    }
+  };
+
   useEffect(() => {
     getCurrentEmployee();
   }, [refresh]);
@@ -147,6 +160,7 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
         setCurrentEmploye,
         employees,
         handleRefresh,
+        fetchOrders,
       }}
     >
       <Toaster position="top-center" richColors />

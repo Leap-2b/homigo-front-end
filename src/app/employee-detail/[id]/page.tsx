@@ -31,14 +31,17 @@ import Order from "../_components/Order";
 
 export default function EmployeeProfilePage() {
   const params = useParams();
-  const id = params.id as string;
-
-  const [isLiked, setIsLiked] = useState(false);
+  const id = params.id ?? "";
 
   const { employees } = useEmployee();
   const { currentUser } = useUser();
 
-  const employee = employees?.find((employee) => employee._id == id);
+  const employee = employees?.find((employee) => employee._id === id);
+
+  const isUserLiked =
+    currentUser && employee?.likedBy?.includes(currentUser._id);
+
+  const [isLiked, setIsLiked] = useState(!!isUserLiked);
 
   if (!employee) {
     return (
@@ -50,14 +53,19 @@ export default function EmployeeProfilePage() {
   }
 
   const likeHandler = async () => {
+    if (!currentUser || !currentUser._id) {
+      toast.error("Хэрэглэгчийн мэдээлэл олдсонгүй.");
+      return;
+    }
+
     try {
-      if (employee && currentUser) {
-        await likeEmploye(currentUser._id, employee._id);
-        setIsLiked(!isLiked);
-        toast.success("Амжилттай хадгалаа");
-      }
+      const userId = currentUser._id; // userId утга үргэлж string байна
+      await likeEmploye(userId, employee._id);
+      setIsLiked(!isLiked);
+      toast.success("Амжилттай хадгалаа");
     } catch (error) {
       console.error("Like хийхэд алдаа:", error);
+      toast.error("Алдаа гарлаа.");
     }
   };
 
@@ -201,10 +209,9 @@ export default function EmployeeProfilePage() {
           </div>
         </div>
 
-        {/* Profile content */}
         <div className="container max-w-6xl mx-auto py-8 px-4">
           <Tabs defaultValue="about" className="w-full">
-            <TabsList className="w-full max-w-md flex  mb-8">
+            <TabsList className="w-full max-w-md flex mb-8">
               <TabsTrigger value="about" className="cursor-pointer">
                 Тухай
               </TabsTrigger>

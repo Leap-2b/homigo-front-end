@@ -14,6 +14,7 @@ const Order = ({
 }) => {
   const [selectedProducts, setSelectedProducts] = useState<productsType[]>([]);
   const [information, setInformation] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSelect = (product: productsType) => {
     const alreadySelected = selectedProducts.find((p) => p._id === product._id);
@@ -29,6 +30,7 @@ const Order = ({
   const productIds = selectedProducts.map((product) => product._id);
 
   const orderHandler = () => {
+    setLoading(true);
     try {
       createOrder(
         currentUser.email,
@@ -42,6 +44,7 @@ const Order = ({
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   };
 
   return (
@@ -87,11 +90,11 @@ const Order = ({
       />
 
       <Button
-        disabled={information === ""}
+        disabled={!information || loading}
         onClick={orderHandler}
         className="w-full"
       >
-        Захиалах
+        {loading ? "Уншиж байна..." : "Захиалах"}
       </Button>
     </div>
   );

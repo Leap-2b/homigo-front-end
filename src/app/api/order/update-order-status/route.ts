@@ -7,7 +7,7 @@ export async function PUT(req: Request): Promise<Response> {
   try {
     const { id, status } = await req.json();
 
-    const validStatuses = ["APPROVE", "CANCEL", "CHANGE"];
+    const validStatuses = ["APPROVE", "CANCEL", "CHANGE", "DONE"];
     if (!validStatuses.includes(status)) {
       return NextResponse.json(
         { message: "Төлөв хүчингүй байна" },

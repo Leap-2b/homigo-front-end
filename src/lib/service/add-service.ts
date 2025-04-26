@@ -13,7 +13,7 @@ export const addService = async (
       price,
     });
     toast.success("Амжилттай нэмэгдлээ!");
-    console.log(response);
+    return response;
   } catch (error: unknown) {
     console.error("Үйлчилгээ нэмхэд алдаа гарлаа", error);
     throw error;

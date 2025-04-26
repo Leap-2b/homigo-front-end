@@ -6,7 +6,7 @@ export const fetchAllEmployees = async (): Promise<
 > => {
   try {
     const { data } = await axios.get("/api/employee/getAllEmployee");
-    console.log(data);
+
     if (data) return data.EmployWithProducts;
     throw new Error("No data received");
   } catch (error) {
