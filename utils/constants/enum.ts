@@ -8,6 +8,7 @@ export enum orderStatusEnum {
   CANCEL = "CANCEL",
   CHANGE = "CHANGE",
   PENDING = "PENDING",
+  DONE = "DONE",
 }
 export enum userRoleStatusEnum {
   USER = "USER",

@@ -1,6 +1,7 @@
 import React from "react";
 import CardSlider from "./cards";
 import EmployeDetail from "./Employe-detail";
+
 const Category = () => {
   return (
     <div className="w-full m-auto flex flex-col items-center  bg-gray-100">

@@ -6,7 +6,6 @@ export const updateOrderStatus = async (id: string, status: string) => {
       id,
       status,
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     console.error("захиалга мэдээлэл солих үед алдаа гарлаа:", error);

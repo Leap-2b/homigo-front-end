@@ -1,11 +1,10 @@
 export type userType = {
-  userName?: string;
-  email?: string;
-  phone?: number;
-  password?: string;
-  role?: string;
-  _id?: string;
-  currentUser?: string;
+  _id: string;
+  userName: string;
+  email: string;
+  phone: number;
+  password: string;
+  role: string;
 };
 export type employeType = {
   about: string;

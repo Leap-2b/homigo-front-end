@@ -7,10 +7,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { orderType } from "@/types/user";
-import { Check, RefreshCw, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
 import { updateOrderStatus } from "@/lib/order/update-orderStatus";
 import { toast } from "sonner";
+import SelectedOrderButton from "./SelectedOrderButton";
 type Props = {
   isLoading: boolean;
   orders: orderType[];
@@ -26,6 +26,7 @@ const OrderTabs = ({
 }: Props) => {
   const [selectedOrder, setSelectedOrder] = useState<orderType | null>(null);
   const [dialogStatus, setDialogStatus] = useState<string>("ALL");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const openDialog = (order: orderType) => {
     setSelectedOrder(order);
@@ -33,6 +34,7 @@ const OrderTabs = ({
   };
 
   const handleStatusChange = async (status: string) => {
+    setLoading(true);
     if (!selectedOrder) return;
     const updated = await updateOrderStatus(selectedOrder._id, status);
     toast.success("Амжилттай солигдлоо");
@@ -43,6 +45,7 @@ const OrderTabs = ({
         ? { ...prev, orderStatus: updated.orderStatus }
         : prev
     );
+    setLoading(false);
   };
 
   const renderOrderCard = (order: orderType, index: number) => (
@@ -94,15 +97,54 @@ const OrderTabs = ({
     <>
       <Tabs value={dialogStatus} onValueChange={setDialogStatus}>
         <TabsList className="space-x-4">
-          <TabsTrigger value="ALL">Бүгд</TabsTrigger>
-          <TabsTrigger value="PENDING">Хүлээгдэж байна</TabsTrigger>
-          <TabsTrigger value="CANCEL">Цуцалсан</TabsTrigger>
-          <TabsTrigger value="CHANGE">Өөрчлөлт хүсэх</TabsTrigger>
-          <TabsTrigger value="APPROVE">Зөвшөөрсөн</TabsTrigger>
+          <TabsTrigger value="ALL">
+            Бүгд (
+            {
+              orders.filter(
+                (order) =>
+                  order.orderStatus !== "DONE" && order.orderStatus !== "CANCEL"
+              ).length
+            }
+            )
+          </TabsTrigger>
+          <TabsTrigger value="PENDING">
+            Хүлээгдэж байна (
+            {orders.filter((order) => order.orderStatus === "PENDING").length})
+          </TabsTrigger>
+          <TabsTrigger value="CANCEL">
+            Цуцалсан (
+            {orders.filter((order) => order.orderStatus === "CANCEL").length})
+          </TabsTrigger>
+          <TabsTrigger value="CHANGE">
+            Өөрчлөлт хүсэх (
+            {orders.filter((order) => order.orderStatus === "CHANGE").length})
+          </TabsTrigger>
+          <TabsTrigger value="APPROVE">
+            Зөвшөөрсөн (
+            {orders.filter((order) => order.orderStatus === "APPROVE").length})
+          </TabsTrigger>
+          <TabsTrigger value="DONE">
+            Амжилттай Дууссан (
+            {orders.filter((order) => order.orderStatus === "DONE").length})
+          </TabsTrigger>
         </TabsList>
+
         <TabsContent value="ALL" className="space-y-4">
-          {orders.map((order, index) => renderOrderCard(order, index))}
+          {orders.filter(
+            (order) =>
+              order.orderStatus !== "DONE" && order.orderStatus !== "CANCEL"
+          ).length === 0 ? (
+            <p>Захиалга байхгүй байна</p>
+          ) : (
+            orders
+              .filter(
+                (order) =>
+                  order.orderStatus !== "DONE" && order.orderStatus !== "CANCEL"
+              )
+              .map((order, index) => renderOrderCard(order, index))
+          )}
         </TabsContent>
+
         <TabsContent value="PENDING" className="space-y-4">
           {renderOrders("PENDING")}
         </TabsContent>
@@ -117,6 +159,9 @@ const OrderTabs = ({
 
         <TabsContent value="APPROVE" className="space-y-4">
           {renderOrders("APPROVE")}
+        </TabsContent>
+        <TabsContent value="DONE" className="space-y-4">
+          {renderOrders("DONE")}
         </TabsContent>
       </Tabs>
 
@@ -180,33 +225,10 @@ const OrderTabs = ({
                     <p className="text-gray-700">{selectedOrder.request}</p>
                   </div>
                 )}
-
-                <Button
-                  className="flex-1 bg-green-600 text-white hover:bg-green-700"
-                  onClick={() => selectedOrder && handleStatusChange("APPROVE")}
-                  disabled={selectedOrder?.orderStatus === "APPROVE"}
-                >
-                  <Check className="mr-2 h-4 w-4" />
-                  Зөвшөөрөх
-                </Button>
-
-                <Button
-                  className="flex-1 bg-red-600 text-white hover:bg-red-700"
-                  onClick={() => selectedOrder && handleStatusChange("CANCEL")}
-                  disabled={selectedOrder?.orderStatus === "CANCEL"}
-                >
-                  <X className="mr-2 h-4 w-4" />
-                  Цуцлах
-                </Button>
-
-                <Button
-                  className="flex-1 bg-blue-600 text-white hover:bg-blue-700"
-                  onClick={() => selectedOrder && handleStatusChange("CHANGE")}
-                  disabled={selectedOrder?.orderStatus === "CHANGE"}
-                >
-                  <RefreshCw className="mr-2 h-4 w-4" />
-                  Өөрчлөлт хүсэх
-                </Button>
+                <SelectedOrderButton
+                  selectedOrder={selectedOrder}
+                  handleStatusChange={handleStatusChange}
+                />
               </div>
             </div>
           )}

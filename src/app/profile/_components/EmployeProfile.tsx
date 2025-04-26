@@ -42,7 +42,6 @@ export default function EmployeProfile() {
   const [loading, setLoading] = useState(false);
 
   const onPersonalSubmit = (values: PersonalFormValues) => {
-    console.log("Personal form submitted:", values);
     toast.success("Хувийн мэдээлэл амжилттай хадгалагдлаа");
   };
 
@@ -57,14 +56,6 @@ export default function EmployeProfile() {
 
   const onAdditionalSubmit = (values: AdditionalFormValues) => {
     if (currentEmploye) {
-      console.log(
-        currentEmploye?._id,
-        values.registerNumber,
-        values.phoneNumber,
-        values.address,
-        values.experience,
-        values.secondPhone
-      );
       changeAdditionallinfo(
         currentEmploye?._id,
         values.registerNumber,

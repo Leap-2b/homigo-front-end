@@ -3,34 +3,27 @@
 import { useEffect, useState } from "react";
 import { orderType } from "@/types/user";
 import { Button } from "@/components/ui/button";
-import { Check, RefreshCw } from "lucide-react";
-import { getOrders } from "@/lib/order/getOrder";
-import { useEmployee } from "@/app/_context/EmployeContext";
-import { Clock, Ban, PenLine } from "lucide-react";
+import { Check, RefreshCw, Clock, Ban, PenLine } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useEmployee } from "@/app/_context/EmployeContext";
 import OrderTabs from "./OrderTabs";
 
 const EmployeeOrderDashboard = () => {
   const [orders, setOrders] = useState<orderType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { currentEmploye } = useEmployee();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { currentEmploye, fetchOrders } = useEmployee();
 
-  const fetchOrders = async () => {
-    try {
-      setIsLoading(true);
-      if (currentEmploye) {
-        const data = await getOrders(currentEmploye?._id);
-        setOrders(data);
-      }
-    } catch (error) {
-      console.error("Захиалгыг татаж чадсангүй:", error);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleFetchOrders = async () => {
+    setIsLoading(true);
+    const data = await fetchOrders();
+    setOrders(data);
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    fetchOrders();
+    if (currentEmploye) {
+      handleFetchOrders();
+    }
   }, [currentEmploye]);
 
   const getStatusIcon = (status: string) => {
@@ -66,8 +59,17 @@ const EmployeeOrderDashboard = () => {
         return (
           <div className="flex items-center gap-2">
             <Check className="h-5 w-5 text-green-500" />
-            <Badge variant="outline" className="bg-blue-50 text-green-700">
+            <Badge variant="outline" className="bg-green-50 text-green-700">
               Зөвшөөрсөн
+            </Badge>
+          </div>
+        );
+      case "DONE":
+        return (
+          <div className="flex items-center gap-2">
+            <Check className="h-5 w-5 text-green-500" />
+            <Badge variant="outline" className="bg-green-50 text-green-700">
+              Дууссан
             </Badge>
           </div>
         );
@@ -84,8 +86,9 @@ const EmployeeOrderDashboard = () => {
           onClick={fetchOrders}
           variant="outline"
           className="flex items-center gap-2"
+          disabled={isLoading} // Loading үед товчийг идэвхгүй болгоно.
         >
-          <RefreshCw className="h-4 w-4" />
+          <RefreshCw className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`} />
           Шинэчлэх
         </Button>
       </div>
@@ -94,7 +97,7 @@ const EmployeeOrderDashboard = () => {
         isLoading={isLoading}
         orders={orders}
         getStatusIcon={getStatusIcon}
-        fetchOrders={fetchOrders}
+        fetchOrders={handleFetchOrders}
       />
     </div>
   );
