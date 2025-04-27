@@ -10,15 +10,15 @@ export default function TrustIndicators() {
       transition={{ delay: 0.3, duration: 0.5 }}
     >
       <div className="flex items-center gap-1">
-        <Shield size={16} className="text-green-500" />
+        <Shield size={16} className="text-[#2672e4]" />
         <span>Баталгаатай Нэвтрэх</span>
       </div>
       <div className="flex items-center gap-1">
-        <User size={16} className="text-green-500" />
+        <User size={16} className="text-[#2672e4]" />
         <span>10,000+ Хэрэглэгч</span>
       </div>
       <div className="flex items-center gap-1">
-        <Building2 size={16} className="text-green-500" />
+        <Building2 size={16} className="text-[#2672e4]" />
         <span>Найдвартай Ажилтан</span>
       </div>
     </motion.div>

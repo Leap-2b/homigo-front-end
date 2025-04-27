@@ -15,7 +15,6 @@ import { LogOut, UserPen } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEmployee } from "@/app/_context/EmployeContext";
 
-
 export default function Header() {
   const { currentUser, setCurrentUser } = useUser();
   const { currentEmploye, setCurrentEmploye } = useEmployee();
@@ -69,7 +68,7 @@ export default function Header() {
   );
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <div className="w-full bg-white border-b sticky top-0 z-50">
         <div className="w-[90%] m-auto justify-between items-center px-4 py-3 flex">
           {/* Logo */}

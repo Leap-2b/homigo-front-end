@@ -58,8 +58,8 @@ const EmployeeOrderDashboard = () => {
       case "APPROVE":
         return (
           <div className="flex items-center gap-2">
-            <Check className="h-5 w-5 text-green-500" />
-            <Badge variant="outline" className="bg-green-50 text-green-700">
+            <Check className="h-5 w-5 text-[#2672e4]" />
+            <Badge variant="outline" className="bg-blue-50 text-green-700">
               Зөвшөөрсөн
             </Badge>
           </div>

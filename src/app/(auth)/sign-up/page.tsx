@@ -20,13 +20,13 @@ const Page = () => {
         <TabsList className="w-full grid grid-cols-2">
           <TabsTrigger
             value="employ"
-            className="data-[state=active]:bg-green-500 data-[state=active]:text-white"
+            className="data-[state=active]:bg-[#3c87f7] data-[state=active]:text-white"
           >
             Ажилтан
           </TabsTrigger>
           <TabsTrigger
             value="client"
-            className="data-[state=active]:bg-green-500 data-[state=active]:text-white"
+            className="data-[state=active]:bg-[#3c87f7] data-[state=active]:text-white"
           >
             Хэрэглэгч
           </TabsTrigger>

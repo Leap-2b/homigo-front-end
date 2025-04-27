@@ -8,13 +8,13 @@ export default function LoginTabs() {
       <TabsList className="w-full grid grid-cols-2">
         <TabsTrigger
           value="login"
-          className="data-[state=active]:bg-green-500 data-[state=active]:text-white"
+          className="data-[state=active]:bg-[#3c87f7] data-[state=active]:text-white"
         >
           Ажилтан
         </TabsTrigger>
         <TabsTrigger
           value="register"
-          className="data-[state=active]:bg-green-500 data-[state=active]:text-white"
+          className="data-[state=active]:bg-[#3c87f7] data-[state=active]:text-white"
         >
           Хэрэглэгч
         </TabsTrigger>

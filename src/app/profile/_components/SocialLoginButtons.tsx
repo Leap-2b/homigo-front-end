@@ -39,7 +39,7 @@ export const SocialLoginButtons = () => {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
+            stroke="#a4cefa"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
