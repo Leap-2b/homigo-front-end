@@ -12,14 +12,13 @@ import { changePassword } from "@/lib/profile/change-password-util";
 import { useEmployee } from "@/app/_context/EmployeContext";
 import { changeAdditionallinfo } from "@/lib/profile/change-additionalI-info";
 
-
-// Личныйн формын утгийн интерфейс
-interface PersonalFormValues {
-  surname: string;
-  name: string;
-  email: string;
-  about: string;
-}
+// // Личныйн формын утгийн интерфейс
+// interface PersonalFormValues {
+//   surname: string;
+//   name: string;
+//   email: string;
+//   about: string;
+// }
 
 // Нууц үгийн формын утгийн интерфейс
 interface PasswordFormValues {
@@ -41,8 +40,8 @@ export default function EmployeProfile() {
   const { currentEmploye } = useEmployee();
   const [loading, setLoading] = useState(false);
 
-  const onPersonalSubmit = (values: PersonalFormValues) => {
-    toast.success("Хувийн мэдээлэл амжилттай хадгалагдлаа");
+  const onPersonalSubmit = () => {
+    toast.success("Хувийн мэclearдээлэл амжилттай хадгалагдлаа");
   };
 
   const onPasswordSubmit = (values: PasswordFormValues) => {

@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-explicit-any: "off" */
+
 import { NextResponse } from "next/server";
 import { OrderModel } from "@/app/models/order-model";
 import { connectMongoDb } from "../../../../../utils/server/db";
