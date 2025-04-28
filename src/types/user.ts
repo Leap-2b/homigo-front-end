@@ -28,6 +28,7 @@ export type employeType = {
 export type productsType = {
   description: string;
   name: string;
+  status: string;
   price: number;
   _id: string;
 };

@@ -10,12 +10,13 @@ import { addService } from "@/lib/service/add-service";
 import { deleteService } from "@/lib/service/delete-service";
 import { RefreshCw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { productsType } from "@/types/user";
 
 const EmployeService = () => {
   const { handleRefresh, currentEmploye } = useEmployee();
   const [price, setPrice] = useState<number>(0);
   const [name, setName] = useState("");
-  const [services, setServices] = useState<any[]>([]);
+  const [services, setServices] = useState<productsType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchServices = async () => {

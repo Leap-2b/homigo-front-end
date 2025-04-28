@@ -2,7 +2,7 @@ import { EmployeModel } from "@/app/models/employe-model";
 import { NextResponse } from "next/server";
 import { connectMongoDb } from "../../../../../utils/server/db";
 import "@/app/models/product-model";
-export async function GET(req: Request): Promise<Response> {
+export async function GET(): Promise<Response> {
   await connectMongoDb();
   try {
     const EmployWithProducts = await EmployeModel.find().populate("products");
