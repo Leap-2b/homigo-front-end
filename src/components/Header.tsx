@@ -123,7 +123,7 @@ export default function Header() {
                 <Link href="/sign-up">
                   <Button
                     size="sm"
-                    className="bg-green-500 hover:bg-green-600 text-white cursor-pointer"
+                    className="bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
                   >
                     Бүртгүүлэх
                   </Button>
