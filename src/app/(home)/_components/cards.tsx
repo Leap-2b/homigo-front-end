@@ -33,8 +33,8 @@ export default function CardSlider() {
   };
 
   return (
-    <main className="py-16 flex flex-col w-[80vw]">
-      <div className="flex  gap-5 w-300 items-center ">
+    <main className="py-16 flex flex-col">
+      <div className="flex gap-5 items-center flex-col md:flex-row">
         {categories.map((category) => {
           const titleParts = category.title.split("&");
           return (
