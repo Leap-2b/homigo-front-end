@@ -9,8 +9,15 @@ const Category = () => {
   const { employees } = useEmployee();
   const [filteredEmployees, setFilteredEmployees] = useState<employeType[]>();
 
-  const handleFilter = (category: string) => {
-    setFilteredEmployees(employees?.filter((emp) => emp.category === category));
+  const handleFilter = (categoryId: string) => {
+    if (filteredEmployees) {
+      setFilteredEmployees(undefined);
+    } else {
+      const filtered = employees?.filter(
+        (employee) => employee.category === categoryId
+      );
+      setFilteredEmployees(filtered);
+    }
   };
 
   return (

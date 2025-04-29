@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEmployee } from "@/app/_context/EmployeContext";
-import { Heart, Star } from "lucide-react";
+import { Heart, ListOrdered, Star } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { employeType } from "@/types/user";
 
@@ -17,13 +17,26 @@ export default function EmployeDetail({
   filteredEmployees?: employeType[];
 }) {
   const { employees } = useEmployee();
-
+  const getEmployeeCount = () => {
+    if (filteredEmployees && filteredEmployees.length > 0) {
+      return filteredEmployees.length;
+    }
+    return employees?.length ?? 0;
+  };
+  console.log(filteredEmployees);
   return (
     <div className="flex flex-col gap-15">
       <section className="w-full px-4 md:px-0 md:w-[80vw]">
         <div className="flex justify-between items-center mb-6 w-full md:w-[80vw]">
-          <h2 className="text-xl md:text-2xl font-bold">Бүх мэргэжилтнүүд</h2>
-          <span className="font-bold">{employees?.length || 0}</span>
+          <h2 className="text-xl md:text-2xl font-bold">
+            {filteredEmployees == undefined
+              ? "Бүх мэргэжилтнүүд"
+              : "Сонгосон мэргэжилтнүүд"}
+          </h2>
+          <span className="font-bold text-[20px] flex gap-2 items-center">
+            <ListOrdered />
+            {getEmployeeCount()}
+          </span>
         </div>
         <div className="flex gap-5 md:gap-10 mb-10 flex-wrap">
           {!filteredEmployees || filteredEmployees.length === 0 ? (
@@ -75,7 +88,7 @@ export default function EmployeDetail({
                             </div>
                             <div className="border border-solid border-gray-500 rounded-lg p-2 font-bold flex justify-center items-center cursor-pointer hover:bg-gray-100">
                               <button className="cursor-pointer">
-                                See Profile
+                                Дэлгэрэнгүй үзэх
                               </button>
                             </div>
                           </div>
@@ -163,7 +176,7 @@ export default function EmployeDetail({
                             </div>
                             <div className="border border-solid border-gray-500 rounded-lg p-2 font-bold flex justify-center items-center cursor-pointer hover:bg-gray-100">
                               <button className="cursor-pointer">
-                                See Profile
+                                Дэлгэрэнгүй үзэх
                               </button>
                             </div>
                           </div>

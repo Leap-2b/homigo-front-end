@@ -14,7 +14,6 @@ import { useUser } from "./UserContext";
 import { employeType, orderType } from "@/types/user";
 import { fetchAllEmployees } from "@/lib/Employee/get-all-employe";
 import axios from "axios";
-import { getOrders } from "@/lib/order/getOrder";
 
 type employeeContextType = {
   signUp: (
@@ -34,7 +33,7 @@ type employeeContextType = {
   setCurrentEmploye: Dispatch<employeType | null>;
   employees: employeType[] | null;
   handleRefresh: () => void;
-  fetchOrders: () => Promise<orderType[]>;
+  // fetchOrders: (id: string) => Promise<orderType[]>;
 };
 
 const employeeContext = createContext<employeeContextType>(
@@ -126,17 +125,15 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const fetchOrders = async (): Promise<orderType[]> => {
-    if (!currentEmploye) return [];
-
-    try {
-      const data = await getOrders(currentEmploye._id);
-      return data;
-    } catch (error) {
-      console.error("Захиалгыг татаж чадсангүй:", error);
-      return [];
-    }
-  };
+  // const fetchOrders = async (id: string): Promise<orderType[]> => {
+  //   try {
+  //     const data = await EmployeeGetOrder(id);
+  //     return data;
+  //   } catch (error) {
+  //     console.error("Захиалгыг татаж чадсангүй:", error);
+  //     return [];
+  //   }
+  // };
 
   useEffect(() => {
     getCurrentEmployee();
@@ -160,7 +157,7 @@ const EmployeeProvider = ({ children }: { children: ReactNode }) => {
         setCurrentEmploye,
         employees,
         handleRefresh,
-        fetchOrders,
+        // fetchOrders,
       }}
     >
       <Toaster position="top-center" richColors />

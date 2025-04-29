@@ -187,10 +187,14 @@ export default function EmployeeProfilePage() {
                   <div className="mt-6">
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button className="w-full md:w-auto">
-                          <Handshake className="w-5 h-5 " />
-                          Захиалах
-                        </Button>
+                        {currentUser ? (
+                          <Button className="w-full md:w-auto">
+                            <Handshake className="w-5 h-5 " />
+                            Захиалах
+                          </Button>
+                        ) : (
+                          ""
+                        )}
                       </DialogTrigger>
                       <DialogContent>
                         <DialogTitle></DialogTitle>
@@ -253,8 +257,6 @@ export default function EmployeeProfilePage() {
                               </span>
                             </div>
                           </div>
-
-                          <Button className="mt-4">Захиалах</Button>
                         </div>
                       ))
                     ) : (
