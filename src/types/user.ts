@@ -38,7 +38,7 @@ export type orderType = {
   orderStatus: string;
   request: string;
   productId: productsType[];
-  userId: string;
+  userId: userType;
   employeId: string;
   isPaid: boolean;
   totalPrice: number;

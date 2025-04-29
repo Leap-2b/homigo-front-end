@@ -111,10 +111,6 @@ const OrderTabs = ({
             Цуцалсан (
             {orders.filter((order) => order.orderStatus === "CANCEL").length})
           </TabsTrigger>
-          <TabsTrigger value="CHANGE">
-            Өөрчлөлт хүсэх (
-            {orders.filter((order) => order.orderStatus === "CHANGE").length})
-          </TabsTrigger>
           <TabsTrigger value="APPROVE">
             Зөвшөөрсөн (
             {orders.filter((order) => order.orderStatus === "APPROVE").length})
@@ -148,11 +144,6 @@ const OrderTabs = ({
         <TabsContent value="CANCEL" className="space-y-4">
           {renderOrders("CANCEL")}
         </TabsContent>
-
-        <TabsContent value="CHANGE" className="space-y-4">
-          {renderOrders("CHANGE")}
-        </TabsContent>
-
         <TabsContent value="APPROVE" className="space-y-4">
           {renderOrders("APPROVE")}
         </TabsContent>

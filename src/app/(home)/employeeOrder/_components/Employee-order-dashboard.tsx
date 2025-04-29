@@ -7,15 +7,17 @@ import { Check, RefreshCw, Clock, Ban, PenLine } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useEmployee } from "@/app/_context/EmployeContext";
 import OrderTabs from "./OrderTabs";
+import { EmployeeGetOrder } from "@/lib/order/employeGetOrder";
 
 const EmployeeOrderDashboard = () => {
   const [orders, setOrders] = useState<orderType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { currentEmploye, fetchOrders } = useEmployee();
+  const { currentEmploye } = useEmployee();
 
   const handleFetchOrders = async () => {
+    if (!currentEmploye) return;
     setIsLoading(true);
-    const data = await fetchOrders();
+    const data = await EmployeeGetOrder(currentEmploye._id);
     setOrders(data);
     setIsLoading(false);
   };
@@ -43,15 +45,6 @@ const EmployeeOrderDashboard = () => {
             <Ban className="h-5 w-5 text-red-500" />
             <Badge variant="outline" className="bg-red-50 text-red-700">
               Цуцалсан
-            </Badge>
-          </div>
-        );
-      case "CHANGE":
-        return (
-          <div className="flex items-center gap-2">
-            <PenLine className="h-5 w-5 text-blue-500" />
-            <Badge variant="outline" className="bg-blue-50 text-blue-700">
-              Өөрчлөлт хүссэн
             </Badge>
           </div>
         );
@@ -83,7 +76,7 @@ const EmployeeOrderDashboard = () => {
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold">Захиалгын жагсаалт</h2>
         <Button
-          onClick={fetchOrders}
+          onClick={() => EmployeeGetOrder}
           variant="outline"
           className="flex items-center gap-2"
           disabled={isLoading} // Loading үед товчийг идэвхгүй болгоно.

@@ -1,8 +1,12 @@
 import axios from "axios";
 
-export const getOrders = async (employeeId: string) => {
+export const EmployeeGetOrder = async (employeeId: string) => {
   try {
-    const response = await axios.post("/api/order/get-orders", { employeeId });
+    const response = await axios.post("/api/order/employee-get-orders", {
+      employeeId,
+    });
+
+    console.log(response);
 
     return response.data.orders;
   } catch (error) {

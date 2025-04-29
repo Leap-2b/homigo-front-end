@@ -84,6 +84,15 @@ export default function Header() {
           {/* Navigation */}
           {currentUser || currentEmploye ? (
             <div className="flex items-center gap-10">
+              {currentUser && !currentEmploye ? (
+                <Link href="/clientOrder">
+                  <p className="flex items-center gap-2 text-black hover:text-green-500 font-semibold border-b-2 border-transparent hover:border-green-500 transition-all duration-200 px-3 py-2">
+                    <span className="text-lg">📋</span>Захиалга
+                  </p>
+                </Link>
+              ) : (
+                ""
+              )}
               {currentEmploye && !currentUser && renderEmployeeLinks()}
               <Popover>
                 <PopoverTrigger>

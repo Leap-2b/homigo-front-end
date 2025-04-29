@@ -73,15 +73,6 @@ const SelectedOrderButton = ({
                 </Button>
 
                 <Button
-                  className="flex-1 bg-blue-600 text-white hover:bg-blue-700 py-1 px-2 text-sm"
-                  onClick={() => selectedOrder && handleStatusChange("CHANGE")}
-                  disabled={selectedOrder?.orderStatus === "CHANGE"}
-                >
-                  <RefreshCw className="mr-1 h-3 w-3" />
-                  Өөрчлөлт хүсэх
-                </Button>
-
-                <Button
                   className="flex-1 bg-green-600 text-white hover:bg-green-700 py-1 px-2 text-sm"
                   onClick={() => selectedOrder && handleStatusChange("DONE")}
                 >
