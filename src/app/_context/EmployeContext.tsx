@@ -11,7 +11,7 @@ import React, {
 } from "react";
 import { toast, Toaster } from "sonner";
 import { useUser } from "./UserContext";
-import { employeType, orderType } from "@/types/user";
+import { employeType } from "@/types/user";
 import { fetchAllEmployees } from "@/lib/Employee/get-all-employe";
 import axios from "axios";
 

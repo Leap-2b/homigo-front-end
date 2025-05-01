@@ -26,10 +26,9 @@ export async function POST(req: Request): Promise<Response> {
       { $push: { likedBy: userId } },
       { new: true }
     );
-    console.log("id", userId, employeId);
-    console.log("like", like);
+
     return new NextResponse(
-      JSON.stringify({ message: "Амжилттай like дарлаа" }),
+      JSON.stringify({ message: "Амжилттай like дарлаа", like }),
       { status: 200 }
     );
   } catch (error) {

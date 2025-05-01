@@ -1,13 +1,12 @@
 "use client";
-import { useEmployee } from "@/app/_context/EmployeContext";
 import { useUser } from "@/app/_context/UserContext";
 import { Badge } from "@/components/ui/badge";
 import { ClientGetOrder } from "@/lib/order/clientGetOrder";
 import { orderType } from "@/types/user";
-import { Ban, Check, Clock, PenLine } from "lucide-react";
+import { Ban, Check, Clock } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
   const [orders, setOrders] = useState<orderType[]>([]);
   const { currentUser } = useUser();
 
@@ -15,7 +14,6 @@ const page = () => {
     if (!currentUser) return;
     const data = await ClientGetOrder(currentUser._id);
     setOrders(data);
-    console.log(data);
   };
 
   useEffect(() => {
@@ -118,4 +116,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
