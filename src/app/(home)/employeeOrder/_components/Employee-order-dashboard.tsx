@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { orderType } from "@/types/user";
 import { Button } from "@/components/ui/button";
-import { Check, RefreshCw, Clock, Ban, PenLine } from "lucide-react";
+import { Check, RefreshCw, Clock, Ban } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useEmployee } from "@/app/_context/EmployeContext";
 import OrderTabs from "./OrderTabs";
@@ -91,6 +91,7 @@ const EmployeeOrderDashboard = () => {
         orders={orders}
         getStatusIcon={getStatusIcon}
         fetchOrders={handleFetchOrders}
+        id={currentEmploye?._id || ""}
       />
     </div>
   );

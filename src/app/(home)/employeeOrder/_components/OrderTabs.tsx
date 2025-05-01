@@ -16,6 +16,7 @@ type Props = {
   orders: orderType[];
   getStatusIcon: (status: string) => React.ReactElement | null;
   fetchOrders: () => void;
+  id: string;
 };
 
 const OrderTabs = ({
@@ -23,15 +24,18 @@ const OrderTabs = ({
   orders,
   getStatusIcon,
   fetchOrders,
+  id,
 }: Props) => {
   const [selectedOrder, setSelectedOrder] = useState<orderType | null>(null);
   const [dialogStatus, setDialogStatus] = useState<string>("ALL");
+  const [loading, setLoading] = useState(false);
   const openDialog = (order: orderType) => {
     setSelectedOrder(order);
     setDialogStatus(order.orderStatus);
   };
 
   const handleStatusChange = async (status: string) => {
+    setLoading(true);
     if (!selectedOrder) return;
     const updated = await updateOrderStatus(selectedOrder._id, status);
     toast.success("Амжилттай солигдлоо");
@@ -42,6 +46,7 @@ const OrderTabs = ({
         ? { ...prev, orderStatus: updated.orderStatus }
         : prev
     );
+    setLoading(false);
   };
 
   const renderOrderCard = (order: orderType, index: number) => (
@@ -215,6 +220,8 @@ const OrderTabs = ({
                 <SelectedOrderButton
                   selectedOrder={selectedOrder}
                   handleStatusChange={handleStatusChange}
+                  id={id}
+                  loading={loading}
                 />
               </div>
             </div>

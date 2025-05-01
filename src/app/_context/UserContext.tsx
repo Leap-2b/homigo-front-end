@@ -1,4 +1,5 @@
 "use client";
+
 import {
   createContext,
   Dispatch,
@@ -9,14 +10,16 @@ import {
 } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
-import { userType } from "@/types/user";
+import { ratingType, userType } from "@/types/user";
 import { Loader } from "@/components/Loading";
+import { getRating } from "@/lib/rating/getRating";
 
 type UserContextType = {
   currentUser: userType | null;
-  setCurrentUser: Dispatch<userType | null>;
+  setCurrentUser: Dispatch<React.SetStateAction<userType | null>>;
   isReady: boolean;
-  setIsReady: Dispatch<boolean>;
+  setIsReady: Dispatch<React.SetStateAction<boolean>>;
+  ratings: ratingType[];
 };
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
@@ -28,6 +31,19 @@ export const useUser = () => {
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<userType | null>(null);
   const [isReady, setIsReady] = useState(false);
+  const [ratings, setRatings] = useState<ratingType[]>([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await getRating();
+
+      if (response?.data.rating) {
+        setRatings(response.data.rating);
+      }
+    } catch (error) {
+      console.error("Failed to fetch ratings:", error);
+    }
+  };
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -35,6 +51,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
       setCurrentUser(JSON.parse(user));
     }
     setIsReady(true);
+    fetchData();
   }, []);
 
   if (!isReady)
@@ -46,7 +63,13 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <UserContext.Provider
-      value={{ currentUser, setCurrentUser, isReady, setIsReady }}
+      value={{
+        currentUser,
+        setCurrentUser,
+        isReady,
+        setIsReady,
+        ratings,
+      }}
     >
       <Toaster position="top-center" richColors />
       {children}

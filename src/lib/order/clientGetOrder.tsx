@@ -6,8 +6,6 @@ export const ClientGetOrder = async (userId: string) => {
       userId,
     });
 
-    console.log(response);
-
     return response.data.orders;
   } catch (error) {
     console.error("Захиалгыг татаж чадсангүй:", error);

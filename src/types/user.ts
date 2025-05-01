@@ -24,7 +24,13 @@ export type employeType = {
   _id: string;
   likedBy: string[];
 };
-
+export type ratingType = {
+  comments: string;
+  employeId: string;
+  rating: number;
+  _v: number;
+  _id: string;
+};
 export type productsType = {
   description: string;
   name: string;

@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import React, { useState, useEffect } from "react";;
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const NavBar = () => {
